@@ -1,0 +1,21 @@
+{   
+    "_id": {
+      "$oid": "5weew51f73938c174fd736ee"
+    },
+    "uniqueID" : "6761b7dc-8410-408b-8fc0-f4f83d9a869f",
+    "city" : "Dhaka",
+    "zipcode" :  "1216",
+    "phoneOne" : "01766666522",
+    "phonetwo" : "01766666523",
+    "phonethree" : "01766666524",
+    "officialemail" : "ugc.all@ugc.edu.bd",
+    "emailDomain" : "ugc.edu.bd",
+    "nameOne" : "Md. Abdul Kamrun Faisal",
+    "emailOne" : "abdul.faisala@gmail.com",
+    "designationOne" : "Engineer",
+    "password" : "$2b$10$xxXC3VT3l/yLTKxsEEdvB.nAbDgBjCEbZF9Urm6nojS6oMS1Dh.1e",
+    "role" : "UGC",
+    "hash" : "c901e6058dd352fedb02d83d9b50f0298b6eedf4db7421514c6e71a990c2011d"
+}
+
+

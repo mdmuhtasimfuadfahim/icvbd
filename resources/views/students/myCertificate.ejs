@@ -1,0 +1,84 @@
+<section class="home-content py-20">
+    <section class="ml-20 certificate_container py-20">
+
+            <h3 class="sub-heading"> Certificate Status </h3>
+            <h1 class="heading"> Check Your Details </h1>
+            <% if(empty){ %>
+                <h1><%= empty%></h1>
+                <h1 class="heading"> No certificate information at the moment. Contact your authority for further details  </h1>
+            <% }else{ %>
+            <form>
+                <div class="row">
+                
+                    <h4 class="mb-10">'<%= certificate.university_name %>' Certiticate</h4>
+                    
+                    <div class="input-group input-group-icon">
+                        <% if(certificate.isVerified === 'not_approved'){ %>
+                        <h5 class="mt-2 ml-20" style="font-size: 16px">Your digital certificate has been created & waiting to be validated. You will get the ID once
+                            it is validated and added to blockchain 
+                        </h5>
+                        <% } %>
+                        
+                        <% if(certificate.isVerified === 'approved'){ %>
+                        <h5 class="mt-2 ml-20 " style="font-size: 16px">Congrats!!Your digital certificate has been created and added to blockchain </h5>
+                        <% } %>
+                        <span class="input-icon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                    </div>
+                    <% if(certificate.isVerified === 'approved'){%>
+                    <div class="input-group input-group-icon">
+                        <h5 class="mt-2 ml-20">Your certificate ID: <%= certificate.uniqueID %></h5>
+                        <span class="input-icon">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                    </div>
+                    <% }  %>
+                    <div class="input-group input-group-icon">
+                        <h5 class="mt-2 ml-20">Your Certificate was created at: <%= moment(certificate.created_at).format('DD:MM:YYYY') %></h5>
+                        <span class="input-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-icon">
+                        <h5 class="mt-2 ml-20">Your Major was in <%= certificate.major %></h5>
+                        <span class="input-icon">
+                            <i class="fas fa-id-card-alt"></i>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-icon">
+                        <h5 class="mt-2 ml-20">Your minor was in <%= certificate.minor %></h5>
+                        <span class="input-icon">
+                            <i class="fas fa-university"></i>
+                        </span>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h5>Your CGPA </h5>
+                            <div class="input-group">
+                                    <h5><%= certificate.cgpa %></h5>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h5>Your date of graduation is  </h5>
+                            <div class="input-group">
+                                <h5><%= certificate.dog_d %>-<%= certificate.dog_m %>-<%= certificate.dog_y %></h5>
+                            </div>
+                        </div>
+                        
+                    </div>
+                   
+                   
+                </div>
+                <div class="btn"></div>
+                <a class="float-right mt-6 text-2xl" href="/student/dashboard">Go Back</a>
+            </form>
+            <%}%>
+        
+        </section>
+</section>

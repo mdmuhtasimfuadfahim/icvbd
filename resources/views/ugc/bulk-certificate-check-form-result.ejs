@@ -1,0 +1,47 @@
+<section class="home-content" style="margin-left:240px">
+    <h3 class="sub-heading"> approved accounts </h3>
+    <h1 class="heading"> Coorporate, Non-Profit Org. and Universities </h1>
+    <a class="rotate-180 ml-20 float-left text-3xl" href="#"><i class="fas fa-video"></i>&nbsp; Watch Tutorial?</a>
+    
+
+    <section class="home-content">
+        <h3 class="sub-heading"> account requests </h3>
+        <h1 class="heading"> Coorporate, Non-Profit Org. and Universities </h1>
+        <a class="rotate-180 ml-20 float-left text-4xl" href="/ugc/accounts/request"><i class="fas fa-angle-double-right"></i></a>
+      <div class="table-wrapper">
+        <div class="new-table w-full mx-auto table-certificate">
+          
+          <div class="table-row table-header">
+            <div class="cell">
+              Certificate List
+            </div>
+            <div class="cell">
+              Results
+            </div>
+            
+          </div>
+          <% result.forEach(function(res) { %>
+          <div class="table-row table-body">
+            <div class="cell" data-title="Organization Name">
+              <%= res %>
+           </div>
+           <div class="cell" data-title="Type of Org.">
+               Validated <i class="fa fa-check" style="font-size:24px;color:green"></i>
+           </div>
+           
+          </div> 
+          <% }) %>
+             
+        </div>    
+      </div>
+      <div class="m-10">
+        <a class="float-right mt-6 text-2xl" href="/ugc/dashboard">Go Back</a>
+      </div>
+      </section>
+      
+    
+           
+      
+      
+  </section>
+  

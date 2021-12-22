@@ -1,0 +1,21 @@
+<section class="home-content " style="margin-left:240px">
+    <h3 class="sub-heading"> WELCOME TO YOUR DASHBOARD </h3>
+    <h1 class="heading">  "<%= user.uniName %>"  </h1>
+</section>
+
+<!-- Certificate search box section start -->
+<section class="login py-2" style="margin-left:200px" >
+
+  <form action="/university/frontpage/verify" method="POST">
+ 
+      <div class="inputBox" >
+          <div class="input" style="width:800px;">
+              <label for="uniqueID" style="font-size:25px">Enter Certificate ID to Search from Database</label>
+              <input  id="uniqueID" name="uniqueID"  type="text" placeholder="Enter Certificate ID to verify">
+          </div>
+          
+      </div>
+      <button type="submit" class="btn">Verify</button>
+      
+  </form>
+

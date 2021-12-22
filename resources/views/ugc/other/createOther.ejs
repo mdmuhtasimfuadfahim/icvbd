@@ -1,0 +1,103 @@
+    <!-- registration section start -->
+    <section class="registration py-20" >
+
+        <h1 class="heading"> Client Registration </h1>
+        
+        <form action="/ugc/client/create-form-process" method="POST">
+            <% if(messages.error) { %>
+                <span class="text-red-500 text-2xl font-bold"><%= messages.error %></span>
+            <% } else { %>
+                <span class="text-green-500 text-2xl font-bold"><%= messages.success %></span>
+            <% } %>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="orgName">Organization Name</label>
+                    <input name="orgName" id="orgName" value="<%= messages.orgName %>" type="text" placeholder="enter organization name">
+                </div>
+                <div class="input">
+                    <label for="typeOfOrg">Type of Organization</label>
+                    <select name="typeOfOrg" id="" class="select-box">
+                        <option value="University">University</option>
+                        <option value="Coorporate">Coorporate</option>
+                        <option value="Non-profit">Non-profit</option>
+                    </select> 
+                 </div>
+            </div>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="country">Country Name</label>
+                    <input name="country" id="country" value="<%= messages.country %>" type="text" placeholder="enter country name">
+                </div>
+                <div class="input">
+                    <label for="state">State Name</label>
+                    <input id="state" name="state" value="<%= messages.state %>" type="text" placeholder="enter state name">
+                 </div>
+            </div>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="city">City Name</label>
+                    <input name="city" id="city" value="<%= messages.city %>" type="text" placeholder="enter city name">
+                </div>
+                <div class="input">
+                    <label for="zipcode">Zipcode</label>
+                    <input id="zipcode" name="zipcode" value="<%= messages.zipcode %>" type="text" placeholder="enter zipcode">
+                 </div>
+            </div>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="phoneOne">Phone Number (One)</label>
+                    <input name="phoneOne" id="phoneOne" type="text" value="<%= messages.phoneOne %>" placeholder="enter contact number">
+                </div>
+                <div class="input">
+                    <label for="phonetwo">Phone Number (Two)</label>
+                    <input id="phonetwo" name="phonetwo" value="<%= messages.phonetwo %>" type="text" placeholder="enter contact number">
+                </div>
+            </div>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="phonethree">Phone Number (Three)</label>
+                    <input id="phonethree" name="phonethree" value="<%= messages.phonethree %>" type="text" placeholder="enter contact number">
+                </div>
+                <div class="input">
+                    <label for="officialemail">Official Email</label>
+                    <input name="officialemail" id="officialemail" value="<%= messages.officialemail %>" type="text" placeholder="enter official email">
+                </div>
+            </div>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="emailDomain">Email Domain</label>
+                    <input name="emailDomain" id="emailDomain" value="<%= messages.emailDomain %>" type="text" placeholder="enter university domain">
+                </div>
+                <div class="input">
+                    <label for="nameOne"> User Fullname</label>
+                    <input id="nameOne" name="nameOne" value="<%= messages.nameOne %>" type="text" placeholder="enter first creator / verifier name">
+                </div>
+            </div>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="emailOne">User Email</label>
+                    <input id="emailOne" name="emailOne" value="<%= messages.emailOne %>" type="text" placeholder="enter first creator / verifier email">
+                </div>
+                <div class="input">
+                    <label for="designationOne">User Designation</label>
+                    <input id="designationOne" name="designationOne" value="<%= messages.designationOne %>" type="text" placeholder="enter first creator / verifier designation">
+                </div>
+            </div>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" value="" type="password" placeholder="****************">
+                </div>
+                <div class="input">
+                    <label for="confirmPass">Confirm Password</label>
+                    <input id="confirmPass" name="confirmPass" value="" type="password" placeholder="*****************">
+                </div>
+            </div>
+        
+            <button type="submit" class="btn">Register Now</button>
+            <a href="/other/login">Already have account?</a>
+            <a class="float-right mt-6" href="/registration">Go Back</a>
+        </form>
+        
+    </section>
+    <!-- registration section end -->

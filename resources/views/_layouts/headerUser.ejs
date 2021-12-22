@@ -1,0 +1,265 @@
+
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class="fas fa-link"></i>
+      <span class="logo_name">UniChain</span>
+    </div>
+      <ul class="nav-links">
+        <% if(user) { %>
+        <% if(user.role === "University") { %>
+          <li>
+            <a href="/university/dashboard" >
+              <i class='bx bx-box'></i>
+              <span class="links_name">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="#">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">My Account</span>
+            </a>
+          </li>
+          <li>
+            <a href="/university/certificate/approved-list" class="">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Approved Certificates</span>
+            </a>
+          </li>
+          <li>
+            <a href="/university/certificate/form" class="">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Create Single Certificates</span>
+            </a>
+          </li>
+          <li>
+            <a href="/university/accounts/request" class="">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Approve Students</span>
+            </a>
+          </li>
+          <li>
+            <a href="/university/log" class="">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">View Logs</span>
+            </a>
+          </li>
+        <% } else if(user.role === "UGC") { %>
+          <li>
+            <a href="/ugc/dashboard" class="#">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="/ugc/accounts/request" class="#">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Approve University</span>
+            </a>
+          </li>
+          <li>
+            <a href="/ugc/accounts/other/request" class="#">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Approve Corporate</span>
+            </a>
+          </li>
+          <li>
+            <a href="/ugc/accounts/completed" class="#">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Permitted University</span>
+            </a>
+          </li>
+          <li>
+            <a href="/ugc/accounts/other/completed" class="#">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Permitted Corporate</span>
+            </a>
+          </li>
+          <li>
+            <a href="/ugc/university/restrict" class="#">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Access Control</span>
+            </a>
+          </li>
+          <li>
+            <a href="/ugc/university/logs" class="#">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Event Log </span>
+            </a>
+          </li>
+          <li>
+            <a href="/ugc/certificate/bulk" class="#">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Bulk Check </span>
+            </a>
+          </li>
+
+        <% } else if(user.role === "Other") { %>
+          <li>
+            <a href="/other/dashboard" class="#">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Dashboard</span>
+            </a>
+          </li>
+        <% } else { %>
+          <li>
+            <a href="/student/dashboard" class="#">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Dashboard</span>
+            </a>
+          </li>
+        <% } %>
+        
+        <% if(user.role === "University") { %>
+          <li>
+            <a href="/university/accounts/completed">
+              <i class='bx bx-box' ></i>
+              <span class="links_name">Users</span>
+            </a>
+          </li>
+        <% } else if(user.role === "UGC") { %>
+          <li>
+            <a href="/ugc/accounts/completed">
+              <i class='bx bx-box' ></i>
+              <span class="links_name">Users</span>
+            </a>
+          </li>
+        <% } else if(user.role === "Other") { %>
+          <li>
+            <a href="/other/account">
+              <i class='bx bx-box' ></i>
+              <span class="links_name">My Account</span>
+            </a>
+          </li>
+        <% } else { %>
+          <li>
+            <a href="/student/account">
+              <i class='bx bx-box' ></i>
+              <span class="links_name">My Account</span>
+            </a>
+          </li>
+        <% } %>
+        <li>
+          <a href="#">
+            <i class=' fa-house'></i>
+            <span class="links_name">Home</span>
+          </a>
+        </li>
+        <li class="log_out">
+          <form id="logOut" action="/logout" method="GET"> </form> 
+          <a onclick="document.getElementById('logOut').submit()" href="#">
+            <i class='bx bx-log-out'></i> 
+            <span class="links_name">Log Out</span>
+          </a>
+        </li>
+        <% } %>
+      </ul>
+  </div>
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Dashboard</span>
+      </div>
+      <div class="dropdown">
+        <span class="dropbtn">
+          <i class="fas fa-user"></i>
+           <%= user.role %>
+        </span>
+          <div class="dropdown-content">
+            <a href="#">Home</a>
+            <a href="#">List</a>
+            <a href="#">Preferences</a>
+            <form id="logOut" action="/logout" method="POST"> </form>  
+            <a onclick="document.getElementById('logOut').submit()" href="#">Logout</a>
+          </div>
+        </div>
+
+      <% if(user){ %>
+        <% if(user.role === 'University'){ %>
+         <div class="box">
+        <div class="notifications">
+          <i class="fas fa-bell"></i>
+          <span class="num">3</span>
+          <ul>
+            <li> 
+              <span class="text">For ID-******* certificate has been created</span>
+            </li>
+            <li>
+              <span class="text">For ID-******* certificate has been created</span>
+            </li>
+            <li>
+              <span class="text">For ID-******* certificate has been created</span>
+            </li>
+            <li>
+              <span class="text">For ID-******* certificate has been created</span>
+            </li>
+            </ul>
+          </div>
+         </div>
+        <% } else if(user.role === 'UGC') { %>
+          <div class="box">
+            <div class="notifications">
+              <i class="fas fa-bell"></i>
+              <span class="num">3</span>
+              <ul>
+                <li> 
+                  <span class="text">For ID-******* certificate has been created</span>
+                </li>
+                <li>
+                  <span class="text">For ID-******* certificate has been created</span>
+                </li>
+                <li>
+                  <span class="text">For ID-******* certificate has been created</span>
+                </li>
+                <li>
+                  <span class="text">For ID-******* certificate has been created</span>
+                </li>
+                </ul>
+              </div>
+            </div>
+          <% } else if(user.role === 'Other') { %>
+            <div class="box">
+              <div class="notifications">
+                <i class="fas fa-bell"></i>
+                <span class="num">3</span>
+                <ul>
+                  <li> 
+                    <span class="text">For ID-******* certificate has been created</span>
+                  </li>
+                  <li>
+                    <span class="text">For ID-******* certificate has been created</span>
+                  </li>
+                  <li>
+                    <span class="text">For ID-******* certificate has been created</span>
+                  </li>
+                  <li>
+                    <span class="text">For ID-******* certificate has been created</span>
+                  </li>
+                  </ul>
+                </div>
+              </div>
+          <% } else { %>
+            <div class="box">
+              <div class="notifications">
+                <i class="fas fa-bell"></i>
+                <span class="num">3</span>
+                <ul>
+                  <li> 
+                    <span class="text">For ID-******* certificate has been created</span>
+                  </li>
+                  <li>
+                    <span class="text">For ID-******* certificate has been created</span>
+                  </li>
+                  <li>
+                    <span class="text">For ID-******* certificate has been created</span>
+                  </li>
+                  <li>
+                    <span class="text">For ID-******* certificate has been created</span>
+                  </li>
+                  </ul>
+                </div>
+            </div>
+          <% } %>
+      <% } %>
+    </nav>
+  </section>

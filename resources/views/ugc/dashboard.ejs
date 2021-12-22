@@ -1,0 +1,51 @@
+<section class="home-content py-20" style="margin-left:240px">
+    <div class="overview-boxes">
+      <div class="box">
+        <div class="right-side">
+          <a href="/ugc/accounts/request" class="box-topic">Account Requests</a>
+        </div>
+      </div>
+      <div class="box">
+        <div class="right-side">
+          <a href="/ugc/accounts/completed" class="box-topic">Approved Users</a>
+        </div>
+      </div>
+      <div class="box">
+        <div class="right-side">
+          <div class="box-topic">Check</div>
+        </div>
+      </div>
+      <div class="box">
+        <div class="right-side">
+          <div class="box-topic">Notifications</div>
+        </div>
+      </div>
+    </div>
+      
+</section>
+
+
+    <!-- Certificate Search Form  section start -->
+    <section class="login py-2" style="margin-left:100px;margin-top:-10px">
+
+      <form action="/ugc/frontpage/verify" method="POST">
+          <% if (certificate===null){ %>
+              <p class='text-2xl text-red-500'>No such certificate exists</p>
+          <% } %>
+          <% if(empty) { %>
+              <span class="text-green-500 text-2xl font-bold">Please enter a valid ID</span>
+          <% } %>
+          <div class="inputBox" >
+              <div class="input" style="width:800px;">
+                  <label for="uniqueID" style="font-size:25px">Enter Certificate ID</label>
+                  <input  id="uniqueID" name="uniqueID"  type="text" placeholder="Enter Certificate ID to verify">
+              </div>
+              
+          </div>
+          <button type="submit" class="btn">Verify</button>
+          
+      </form>
+      
+  </section>
+  <!-- END OF Certificate Search Form  section  -->
+

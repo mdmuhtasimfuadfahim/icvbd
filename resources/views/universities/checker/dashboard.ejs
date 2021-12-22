@@ -1,0 +1,110 @@
+<section class="home-content py-5">
+      <div class="overview-boxes">
+        <div class="box">
+          <div class="right-side">
+            <a href="/university/certificate/table" class="box-topic">Validate Certificate</a>
+          </div>
+        </div>
+
+        
+        <div class="box">
+          <div class="right-side">
+            <a href="/university/my/account" class="box-topic">My Account</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <div class="new-table w-full mx-auto table-certificate">
+          
+          <div class="table-row table-header">
+            <div class="cell">
+             Validate and add to chain
+            </div>
+  
+            <div class="cell">
+              Student Name
+            </div>
+            <div class="cell">
+              Student ID
+            </div>
+            <div class="cell">
+               Email
+            </div>
+            <div class="cell">
+               CGPA 
+            </div>
+            <div class="cell">
+              Major
+            </div>
+            <div class="cell">
+              Minor
+            </div>
+            <div class="cell">
+              Created At 
+            </div>
+            
+          </div>
+         <% if(certificates.length>0){ %>
+          <% certificates.forEach(function(certificate) { %>
+            <div class="table-row table-body">
+              <div class="cell" data-title="Registration Status">
+                <div class="inline-block relative w-64 text-left">
+                <form action="/university/checker/verify" method="POST">
+                    <input type="hidden" name="certificateId" value="<%= certificate._id %>">
+                    <select name="isVerified" onchange="this.form.submit()"
+                        class="block appearance-none w-full bg-white baccount baccount-gray-400 hover:baccount-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                        <option value="not_verified"
+                            <%= certificate.isVerified === 'not_verified' ? 'selected' : '' %>>
+                            Not Approved</option>
+                        <option value="approved" <%= certificate.isVerified === 'verified' ? 'selected' : '' %>>
+                            Approved</option>
+                    </select>
+                </form>
+                <div
+                    class="pointer-events-none absolute inset-y-0 right-0 flex items-left px-2 text-gray-700">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20">
+                        <path
+                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </div>
+              </div>
+            </div>
+            <div class="cell" data-title="Verify Status">
+              <%= certificate.full_name %>
+           </div>
+           <div class="cell" data-title="Verify Status">
+            <%= certificate.student_id %>
+           </div>
+           <div class="cell" data-title="Verify Status">
+            <%= certificate.email_address %>
+           </div>
+           <div class="cell" data-title="Verify Status">
+            <%= certificate.cgpa %>
+           </div>
+           <div class="cell" data-title="Verify Status">
+            <%= certificate.major %>
+           </div>
+           <div class="cell" data-title="Verify Status">
+            <%= certificate.minor %>
+           </div>
+           <div class="cell" data-title="Registration Date">
+            <%= moment(certificate.created_at).format('MMMM Do YYYY, h:mm:ss a') %>
+            </div>
+            </div>
+            <% })}else{ %>
+            <div>
+              <p class='content-center text-3xl'>No Pending Certificates at the moment. You will notified when
+                a certificate needs to be validates. Thanks
+              </p>
+            </div>
+            <% } %>
+
+
+
+
+        </div>
+      </div>
+        
+</section>

@@ -1,0 +1,97 @@
+<section class="home-content" style="margin-left:240px">
+    <h3 class="sub-heading"> University Logs </h3>
+    <h1 class="heading"> View activities of your organization </h1>
+    <a class="rotate-180 ml-20 float-left text-3xl" href="#"><i class="fas fa-video"></i>&nbsp; Watch Tutorial?</a>
+    
+
+    <section class="home-content" style="margin-top:-100px">
+       
+      <div class="table-wrapper">
+        <div class="new-table w-full mx-auto table-certificate">
+          
+          <div class="table-row table-header">
+            <div class="cell">
+              Date
+            </div>
+            <div class="cell">
+              University 
+            </div>
+            <div class="cell">
+              Designation 
+            </div>
+            <div class="cell">
+              Activity 
+            </div>
+            
+          </div>
+          <% logs.forEach(function(log) { %>
+            
+          <div class="table-row table-body">
+            <div class="cell" data-title="Organization Name">
+              <%= moment(log.createdAt).format('DD:MM:YYYY') %> 
+            </div>
+            <div class="cell" data-title="Type of Org.">
+               <%= log.uniName %>
+            </div>
+            <div class="cell" data-title="Type of Org.">
+              <%=log.officialType %> 
+            </div>
+            <div class="cell" data-title="Type of Org.">
+              <%= log.logText %>
+             </div>
+           
+          </div> 
+          <% }) %>
+
+          <div class="table-row table-body">
+            <div class="cell" data-title="Organization Name">
+              October 30,2021 7:00 PM 
+            </div>
+            <div class="cell" data-title="Type of Org.">
+               University of Khulna
+            </div>
+            <div class="cell" data-title="Type of Org.">
+              Checker 
+            </div>
+            <div class="cell" data-title="Type of Org.">
+               Blockchained Certificate: 907eb4eb-ggle-4bdf-8f1e-fdaee435e9
+             </div>
+           
+          </div> 
+
+          <div class="table-row table-body">
+            <div class="cell" data-title="Organization Name">
+              October 30,2021 6:00 PM 
+            </div>
+            <div class="cell" data-title="Type of Org.">
+               University of Barishal
+            </div>
+            <div class="cell" data-title="Type of Org.">
+              Maker 
+            </div>
+            <div class="cell" data-title="Type of Org.">
+              Created Certificate: 0071eb4eb-ggle-4bdf-8f1e-fdaee435e9
+             </div>
+           
+          </div> 
+          
+          
+           
+          </div>
+
+         
+          
+             
+        </div>    
+      </div>
+      <div class="m-10">
+        <a class="float-right mt-6 text-2xl" href="/ugc/dashboard">Go Back</a>
+      </div>
+      </section>
+      
+    
+           
+      
+      
+  </section>
+  

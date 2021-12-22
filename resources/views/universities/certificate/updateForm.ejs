@@ -1,0 +1,232 @@
+<!-- Certificate Section Start -->
+<section class="home-content py-20">
+    <section class="ml-20 certificate_container py-20">
+            <h3 class="sub-heading"> certificate update </h3>
+            <h1 class="heading"> update this certificate </h1>
+        
+            <form id="update_form" method="POST">
+
+                <div class="row">
+                    <h4 class="mb-10">Certificate Update Form</h4>
+                    <div class="input-group input-group-icon">
+                        <input type="hidden" name="id" value="<%= certificate._id %>">
+                        <input type="text" name="full_name" value="<%= certificate.full_name %>" placeholder="Full Name">
+                        <span class="input-icon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-icon">
+                        <input type="text" name="email_address" value="<%= certificate.email_address %>" placeholder="Email Address">
+                        <span class="input-icon">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-icon">
+                        <input type="text" name="student_id" value="<%= certificate.student_id %>" placeholder="Student ID">
+                        <span class="input-icon">
+                            <i class="far fa-id-badge"></i>
+                        </span>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h5>Required Credit</h5>
+                            <div class="input-group">
+                                    <input type="radio" name="credit" id="credit-completed" value="completed" 
+                                    <%if(certificate.credit === "completed"){%>
+                                        <%="checked"%>
+                                    <%}%>>
+                                    <label for="credit-completed">Completed</label>
+                                    <input type="radio" name="credit" id="credit-incompleted" value="incompleted"
+                                    <%if(certificate.credit === "incompleted"){%>
+                                        <%="checked"%>
+                                    <%}%>>
+                                    <label for="credit-incompleted">Incompleted</label>
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <h5>Required Courses</h5>
+                            <div class="input-group">
+                                <input type="radio" name="courses" id="courses-completed" value="completed" checked
+                                <%if(certificate.courses === "completed"){%>
+                                    <%="checked"%>
+                                <%}%>>
+                                <label for="courses-completed">Completed</label>
+                                <input type="radio" name="courses" id="courses-incompleted" value="incompleted"
+                                <%if(certificate.courses === "incompleted"){%>
+                                    <%="checked"%>
+                                <%}%>>
+                                <label for="courses-incompleted">Incompleted</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h5>University Name</h5>
+                            <div class="input-group">
+                                <select name="university_name" id="" >
+                                    <option value="Univeristy of Liberal Arts Bangladesh" <% if(certificate.university_name === 'Univeristy of Liberal Arts Bangladesh'){ %>
+                                         <%= 'selected'%> 
+                                         <% } %>>
+                                         Univeristy of Liberal Arts Bangladesh</option>
+                                    <option value="North South University" <% if(certificate.university_name === 'North South University'){ %>
+                                         <%= 'selected'%> 
+                                         <% } %>>
+                                         North South University</option>
+                                    <option value="Daffodil International University" <% if(certificate.university_name === 'Daffodil International University'){ %>
+                                         <%= 'selected' %> 
+                                         <% } %>>
+                                         Daffodil International University</option>
+                                    <option value="United International University" <% if(certificate.university_name === 'United International University'){ %>
+                                         <%= 'selected' %> 
+                                         <% } %>>
+                                         United International University</option>
+                                    <option value="BRAC University" <% if(certificate.university_name === 'BRAC University'){ %>
+                                         <%= 'selected' %> 
+                                         <% } %>>
+                                         BRAC University</option>
+                                    <option value="ASA University Bangladesh" <% if(certificate.university_name === 'ASA University Bangladesh'){ %>
+                                         <%= 'selected' %> 
+                                         <% } %>>
+                                         ASA University Bangladesh</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <h5>Major</h5>
+                            <div class="input-group">
+                                <select name="major" id="">
+                                    <option value="CSE" <% if(certificate.major === 'CSE'){ %>
+                                        <%= 'selected' %> 
+                                        <% } %>>CSE</option>
+                                    <option value="EEE" <% if(certificate.major === 'EEE'){ %>
+                                        <%= 'selected' %> 
+                                        <% } %>>EEE</option>
+                                    <option value="BBA" <% if(certificate.major === 'BBA'){ %>
+                                        <%= 'selected' %> 
+                                        <% } %>>BBA</option>
+                                    <option value="MSJ" <% if(certificate.major === 'MSJ'){ %>
+                                        <%= 'selected' %> 
+                                        <% } %>>MSJ</option>
+                                    <option value="Law" <% if(certificate.major === 'Law'){ %>
+                                        <%= 'selected' %> 
+                                        <% } %>>Law</option>
+                                    <option value="English" <% if(certificate.major === 'English'){ %>
+                                        <%= 'selected' %> 
+                                    <% } %>>English</option>
+                                </select>
+                            </div>
+                        </div> 
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h5>CGPA</h5>
+                                <div class="input-group">
+                                    <div class="">
+                                        <input name="cgpa" value="<%= certificate.cgpa %>" type="text" placeholder="3.50">
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <h5>Minor</h5>
+                            <div class="input-group">
+                                <select name="minor" id="">
+                                    <option value="CSE" <% if(certificate.minor === 'CSE'){ %> 
+                                        <%= 'selected' %>
+                                        <% } %>>
+                                        CSE</option>
+                                    <option value="EEE" <% if(certificate.minor === 'EEE'){ %> 
+                                        <%= 'selected' %>
+                                        <% } %>>
+                                        EEE</option>
+                                    <option value="BBA" <% if(certificate.minor === 'BBA'){ %> 
+                                        <%= 'selected' %>
+                                        <% } %>>
+                                        BBA</option>
+                                    <option value="MSJ" <% if(certificate.minor === 'MSJ'){ %> 
+                                        <%= 'selected' %>
+                                        <% } %>>
+                                        MSJ</option>
+                                    <option value="Law" <% if(certificate.minor === 'Law'){ %> 
+                                        <%= 'selected' %>
+                                        <% } %>>
+                                        Law</option>
+                                    <option value="English" <% if(certificate.minor === 'English'){ %> 
+                                        <%= 'selected' %>
+                                        <% } %>>
+                                        English</option>
+                                </select>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h5>Gender</h5>
+                            <div class="input-group">
+                                <input type="radio" name="gender" id="gender-male" value="male" <% if(certificate.gender === 'male'){ %>
+                                     <%= 'checked' %>
+                                     <% } %>>
+                                <label for="gender-male">Male</label>
+                                <input type="radio" name="gender" id="gender-female" value="female" <% if(certificate.gender === 'female'){ %>
+                                     <%= 'checked' %>
+                                     <% } %>>
+                                <label for="gender-female">Female</label>
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <h5>Date of Birth</h5>
+                            <div class="input-group">
+                                <div class="col-third">
+                                    <input name="dob_d" value="<%= certificate.dob_d %>" type="number" placeholder="DD">
+                                </div>
+                                <div class="col-third">
+                                    <input name="dob_m" type="numebr" value="<%= certificate.dob_m %>" placeholder="MM">
+                                </div>
+                                <div class="col-third">
+                                    <input name="dob_y" type="number" value="<%= certificate.dob_y %>" placeholder="YYYY">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h5>Date of Admission</h5>
+                            <div class="input-group">
+                                <div class="col-third">
+                                    <input name="doa_d" type="number" value="<%= certificate.doa_d %>" placeholder="DD">
+                                </div>
+                                <div class="col-third">
+                                    <input name="doa_m" type="number" value="<%= certificate.doa_m %>" placeholder="MM">
+                                </div>
+                                <div class="col-third">
+                                    <input name="doa_y" type="number" value="<%= certificate.doa_y %>" placeholder="YYYY">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <h5>Date of Graduation</h5>
+                            <div class="input-group">
+                                <div class="col-third">
+                                    <input name="dog_d" type="number" value="<%= certificate.dog_d %>" placeholder="DD">
+                                </div>
+                                <div class="col-third">
+                                    <input name="dog_m" type="number" value="<%= certificate.dog_m %>" placeholder="MM">
+                                </div>
+                                <div class="col-third">
+                                    <input name="dog_y" type="number" value="<%= certificate.dog_y %>" placeholder="YYYY">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn update">Submit Form</button>
+                <a class="float-right mt-6 text-2xl" href="/university/certificate/table">Go Back</a>
+            </form>
+        </section>
+    </section>
+    
+    <!-- Certificate Section End -->

@@ -1,0 +1,88 @@
+<section class="home-content">
+    <h3 class="sub-heading"> approved accounts </h3>
+    <h1 class="heading"> students </h1>
+    <a class="mr-20 float-right text-4xl" href="/university/accounts/request"><i class="fas fa-angle-double-right"></i></a>
+
+    <div class="table-wrapper">
+      <div class="new-table w-full mx-auto table-certificate">
+        
+        <div class="table-row table-header">
+          <div class="cell">
+            First Name
+          </div>
+          <div class="cell">
+            Last Name
+          </div>
+          <div class="cell">
+            Date of Birth
+          </div>
+          <div class="cell">
+            University Name
+          </div>
+          <div class="cell">
+            Student Email
+          </div>
+          <div class="cell">
+            Student ID
+          </div>
+          <div class="cell">
+            Contact
+          </div>
+          <div class="cell">
+            Address
+          </div>
+          <div class="cell">
+            Registration Status
+          </div>
+          <div class="cell">
+            Verify Status
+          </div>
+          <div class="cell">
+            Authentication Date
+          </div>
+        </div>
+        <% accounts.forEach(function(account) { %>        
+        <div class="table-row table-body">
+            <div class="cell" data-title="First Name">
+                <%= account.firstName %>
+             </div>
+             <div class="cell" data-title="Last Name">
+                <%= account.lastName %>
+             </div>
+             <div class="cell" data-title="Date of Birth">
+                <%= moment(account.dob).format('DD:MM:YYYY') %>
+             </div>
+             <div class="cell" data-title="University Name">
+                <%= account.uniName %>
+             </div>
+             <div class="cell" data-title="Student Email">
+                <%= account.studentEmail %>
+             </div>
+             <div class="cell" data-title="Student ID">
+                <%= account.studentID %>
+             </div>
+             <div class="cell" data-title="Contact">
+                <%= account.phone %>
+             </div>
+             <div class="cell" data-title="Address">
+                <%= account.address %>
+             </div>
+             <div class="cell" data-title="Registration Status">
+                <%= account.registrationStatus %>
+             </div>
+             <div class="cell" data-title="Verify Status">
+                <%= account.inVerified %>  
+            </div>
+             <div class="cell" data-title="Authentication Date">
+                <%= moment(account.updatedAt).format('DD:MM:YYYY') %>  
+            </div>
+        </div> 
+        <% }) %>
+           
+      </div>    
+    </div>
+    <div class="m-10">
+      <a class="float-right mt-6 text-2xl" href="/university/dashboard">Go Back</a>
+    </div>    
+  </section>
+  

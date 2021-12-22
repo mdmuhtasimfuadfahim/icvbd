@@ -1,0 +1,78 @@
+<section class="home-content py-20">
+    <section class="ml-20 certificate_container py-20">
+
+            <h3 class="sub-heading"> Account Details </h3>
+            <h1 class="heading"> Check Your Details </h1>
+            
+            <form>
+                <div class="row">
+                    <h4 class="mb-10">My Account</h4>
+                    <div class="input-group input-group-icon">
+                        <h5 class="mt-2 ml-20"><%= student.firstName %> <%= student.lastName %></h5>
+                        <span class="input-icon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-icon">
+                        <h5 class="mt-2 ml-20"><%= student.studentEmail %></h5>
+                        <span class="input-icon">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-icon">
+                        <h5 class="mt-2 ml-20"><%= student.phone %></h5>
+                        <span class="input-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-icon">
+                        <h5 class="mt-2 ml-20"><%= student.studentID %></h5>
+                        <span class="input-icon">
+                            <i class="fas fa-id-card-alt"></i>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-icon">
+                        <h5 class="mt-2 ml-20"><%= student.uniName %></h5>
+                        <span class="input-icon">
+                            <i class="fas fa-university"></i>
+                        </span>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h5>Date of Birth</h5>
+                            <div class="input-group">
+                                    <h5><%= moment(student.dob).format('DD:MM:YYYY') %></h5>
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <h5>Address</h5>
+                            <div class="input-group">
+                                <h5><%= student.address %></h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h5>Registration Date</h5>
+                            <div class="h5-group">
+                                    <h5><%= moment(student.updatedAt).format('DD:MM:YYYY') %></h5>
+                            </div>
+                        </div> 
+                        <div class="col-half">
+                            <h5>Granted Date</h5>
+                            <div class="input-group">
+                                <div class="col-third">
+                                    <h5><%= moment(student.updatedAt).format('DD:MM:YYYY') %></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn"></div>
+                <a class="float-right mt-6 text-2xl" href="/student/dashboard">Go Back</a>
+            </form>
+        
+        </section>
+</section>

@@ -1,0 +1,27 @@
+    <!-- login section start -->
+    <section class="login py-20" >
+
+        <h3 class="sub-heading"> student login </h3>
+        <h1 class="heading"> login to continue </h1>
+    
+        <form action="/student/login" method="POST">
+            <% if(messages.error) { %>
+                <span class="text-red-500 text-2xl font-bold"><%= messages.error %></span>
+            <% } %>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="studentEmail">your email</label>
+                    <input id="studentEmail" name="studentEmail" value="<%= messages.studentEmail %>" type="text" placeholder="enter your university email">
+                </div>
+                <div class="input">
+                    <label for="password">your password</label>
+                    <input name="password" id="password" type="password" placeholder="********************">
+                </div>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <a href="/student/registration">Don't have account?</a>
+            <a class="float-right mt-6" href="/login">Go Back</a>
+        </form>
+    
+    </section>
+    <!-- login section end -->

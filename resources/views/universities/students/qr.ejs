@@ -1,0 +1,21 @@
+<section class="home-content">
+    <h3 class="sub-heading"> approved accounts </h3>
+    <h1 class="heading"> students </h1>
+    <canvas id="qr"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script>
+      (function() {
+        var qr = new QRious({
+          element: document.getElementById('qr'),
+          background: 'white',
+            backgroundAlpha: 0.8,
+            foreground: 'black',
+            foregroundAlpha: 0.8,
+            level: 'H',
+            padding: 25,
+            size: 300,
+            value: 'https://github.com/neocotic/qrious'
+        });
+      })();
+    </script>
+</section>

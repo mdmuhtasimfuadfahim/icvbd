@@ -1,0 +1,124 @@
+<section class="home-content" style="margin-left:240px">
+    <h3 class="sub-heading text-3xl"> APPROVED ACCOUNTS </h3>
+    <h1 class="heading"> Coorporate, Non-Profit Org. and 3rd Party Universities </h1>
+    <a class="rotate-180 ml-20 float-left text-4xl" href="/ugc/accounts/completed"><i class="fas fa-angle-double-right"></i></a>
+
+    <div class="table-wrapper">
+      <div class="new-table w-full mx-auto table-certificate">
+        
+        <div class="table-row table-header">
+          <div class="cell">
+            Organization Name
+          </div>
+          <div class="cell">
+            Type of Org.
+          </div>
+          <div class="cell">
+            Country 
+           </div>
+           <div class="cell">
+            State
+           </div>
+           <div class="cell">
+            City
+          </div>
+          <div class="cell">
+            Zipcode
+          </div>
+          <div class="cell">
+            Phone Number 1
+          </div>
+          <div class="cell">
+            Phone Number 2
+          </div>
+          <div class="cell">
+            Phone Number 3
+          </div>
+          <div class="cell">
+            Official Email
+          </div>
+          <div class="cell">
+            Email Domain
+          </div>
+          <div class="cell">
+            First Creator Name
+          </div>
+          <div class="cell">
+            First Creator Email
+          </div>
+          <div class="cell">
+            First Creator Designation
+          </div>
+          <div class="cell">
+            Registration Status
+          </div>
+          <div class="cell">
+            Verify Status
+          </div>
+          <div class="cell">
+            Authentication Date
+          </div>
+        </div>
+        <% accounts.forEach(function(account) { %>        
+        <div class="table-row table-body">
+            <div class="cell" data-title="Organization Name">
+                <%= account.orgName %>
+             </div>
+             <div class="cell" data-title="Type of Org.">
+                <%= account.typeOfOrg %>
+             </div>
+             <div class="cell" data-title="Country">
+                <%= account.country %>
+             </div>
+             <div class="cell" data-title="State">
+                <%= account.state %>
+             </div>
+             <div class="cell" data-title="City">
+                <%= account.city %>
+             </div>
+             <div class="cell" data-title="Zipcode">
+                <%= account.zipcode %>
+             </div>
+             <div class="cell" data-title="Phone Number 1">
+                <%= account.phoneOne %>
+             </div>
+             <div class="cell" data-title="Phone Number 2">
+                <%= account.phonetwo %>
+             </div>
+             <div class="cell" data-title="Phone Number 3">
+                <%= account.phonethree %>
+             </div>
+             <div class="cell" data-title="Official Email">
+                <%= account.officialemail %>
+             </div>
+             <div class="cell" data-title="Email Domain">
+                <%= account.emailDomain %>
+             </div>
+             <div class="cell" data-title="First Creator Name">
+                <%= account.nameOne %>
+             </div>
+             <div class="cell" data-title="First Creator Email">
+                <%= account.emailOne %>
+             </div>
+             <div class="cell" data-title="First Creator Designation">
+                <%= account.designationOne %>
+             </div>
+             <div class="cell" data-title="Registration Status">
+                <%= account.registrationStatus %>
+             </div>
+             <div class="cell" data-title="Verify Status">
+                <%= account.inVerified %>  
+            </div>
+             <div class="cell" data-title="Authentication Date">
+                <%= moment(account.updatedAt).format('DD:MM:YYYY') %>  
+            </div>
+        </div> 
+        <% }) %>
+           
+      </div>    
+    </div>
+    <div class="m-10">
+      <a class="float-right mt-6 text-2xl" href="/ugc/dashboard">Go Back</a>
+    </div>    
+  </section>
+  

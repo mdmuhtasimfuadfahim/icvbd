@@ -1,0 +1,119 @@
+<!-- home section start -->
+    <section class="home py-20" >
+        <h3 class="sub-heading"> Home Page </h3>
+        <h1 class="heading"> Welcome to Blockchain based certificate verification by UGC </h1>    
+    </section>
+
+<!-- Picture Section -->
+<div class="#" style="margin:auto;width:70%">
+    <img src="/img/makers-operation.png" width="1000" height="1000" alt="Maker">
+    <br/><br/>
+    <img src="/img/ugc-operations.png" width="1000" height="1000" alt="UGC">
+</div>
+
+<!--Script to disable right click -->
+<script>
+    document.addEventListener("contextmenu", function(event){
+    event.preventDefault();
+    alert('Right Click is Disabled');    
+    }, false);
+</script>
+
+<!-- End ofPicture Section -->
+
+    <!-- Certificate Search Form  section start -->
+    <section class="login py-2" >
+
+        <form action="/frontpage/verify" method="POST">
+            <% if (certificate===null){ %>
+                <p class='text-2xl text-red-500'>No such certificate exists</p>
+            <% } %>
+            <% if(empty) { %>
+                <span class="text-green-500 text-2xl font-bold">Please enter a valid ID</span>
+            <% } %>
+            <div class="inputBox" >
+                <div class="input" style="width:800px;">
+                    <label for="uniqueID" style="font-size:25px">Enter Certificate ID</label>
+                    <input  id="uniqueID" name="uniqueID"  type="text" placeholder="Enter Certificate ID to verify">
+                </div>
+                
+            </div>
+            <button type="submit" class="btn">Verify</button>
+            
+        </form>
+        
+    </section>
+    <!-- END OF Certificate Search Form  section  -->
+
+
+<!-- home section end -->
+
+
+
+
+
+<!-- Certificate Search Box Result Section  -->
+<% if(certificate && !empty){ %>   
+    <% if(certificate.isVerified === "approved") { %>
+    <section class="home_certificate py-20 ml-50">
+        <div style="width:800px; height:750px; padding:20px; text-align:center; border: 10px solid #787878">
+            <div style="width:750px; height:700px; padding:10px; text-align:center; border: 5px solid #787878">
+                   <div style="float: right; font-size: 13px;">
+                    <p style="font-size: 14px;">Un. ID: <%= certificate.uniqueID %></p>
+                   </div>
+                   
+                   <br><br>
+                   <span style="font-size:40px; font-weight:bold mt-30"><%= certificate.university_name %></span>
+                   <br><br>
+                   <span style="font-size:25px; font-weight:bold"><b>PROVISIONAL CERTIFICATE</b></span>
+                   <br><br><br><br>
+                   <span style="font-size:20px; font-family: 'Satisfy', cursive;"><p>This is to certify that 
+                          <b><%= certificate.full_name %></b>
+                          <br>
+                          bearing ID# <b><%= certificate.student_id %></b>
+                          <br>has fulfilled the 
+                          <br>prescribed requirements for the degree of 
+                          <br>
+                          <b><%= certificate.major %> </b>
+                           
+                          <br>with minor <%= certificate.minor%></b>
+                          <br>and completed all credits
+                          <br>with a Cumulative Grade Point Average (CGPA) 
+                          <br><%= certificate.cgpa %> (on a 4.0 scale).
+                          <br>with Date of Admission: <%= moment(certificate.doa).format('DD/MM/YYYY') %>
+                          <br>with Date of Graduation: <%= moment(certificate.dog).format('DD/MM/YYYY') %>
+                          <br><br>
+                          <% if(certificate.gender === 'male'){%>
+                              His
+                          <% } else { %>
+                              Her
+                          <% } %>
+                            Father's Name: "<%= certificate.father_name %>"" and 
+                          <br> Mother's Name: "<%= certificate.mother_name %>"
+                      </p>
+                    </span>
+                    <br/><br/>
+                    <div style="background-color: blue;">
+                        <div style="float: left; padding-left: 10px;" class="signer">
+                            <p>______________________</p>
+                            <b style="font-size: 16px;">Created by </b>
+                        </div>
+                        <div style="float: right; padding-right: 10px;" class="signer">
+                            <p>______________________</p>
+                            <b style="font-size: 16px;">Verified by</b>
+                        </div>
+                    </div>
+                    <br/><br/><br><br><br>
+                   <span style="font-size:18px"><p>Date of issue: <%= moment(certificate.updatedAt).format('DD MMMM YYYY') %></p></span><br>
+                    
+            </div>
+        </div>
+    
+
+        
+
+
+    </section> 
+    <% } %> 
+  <% } %>
+  <!--END OF  Certificate Search Box Result Section  -->

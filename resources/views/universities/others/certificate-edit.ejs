@@ -1,0 +1,45 @@
+<section class="home-content py-20">
+    <div class="overview-boxes">
+      <div class="box">
+        <div class="right-side">
+          <a href="/university/certificate/table" class="box-topic">Certificate</a>
+        </div>
+      </div>
+      <div class="box">
+        <div class="right-side">
+          <a href="/university/certificate/form" class="box-topic">Single Certificate Creation</a>
+        </div>
+      </div>
+      <div class="box">
+        <div class="right-side">
+          <a href="/university/certificate/edit" class="box-topic">Edit Certificate</a>
+        </div>
+      </div>
+      <div class="box">
+        <div class="right-side">
+          <a href="/university/accounts/request" class="box-topic">Account Requests</a>
+        </div>
+      </div>
+      <div class="box">
+        <div class="right-side">
+          <a href="/university/my/account" class="box-topic">My Account</a>
+        </div>
+      </div>
+    </div>  
+</section>
+<p class="text-3xl" style="margin-left:230px;color:#001a66;font-weight:500">Certificate edit request will be sent to UGC Admin for approval </p> 
+<!-- Certificate search box section start -->
+<section class="login py-2" >
+
+<form action="/frontpage/verify" method="POST">
+
+    <div class="inputBox" >
+        <div class="input" style="width:800px;">
+            <label for="uniqueID" style="font-size:25px">Enter student ID for his/her certificate edit</label>
+            <input  id="uniqueID" name="uniqueID"  type="text" placeholder="Enter Student ID">
+        </div>
+        
+    </div>
+    <button type="submit" class="btn">Verify</button>
+    
+</form>

@@ -1,0 +1,41 @@
+<section class="home-content">
+    <h3 class="sub-heading"> Certificate Delete </h3>
+    <h1 class="heading"> Search a Student by ID and send his/her Certificate Delete Request to UGC </h1>
+    <% if(locals.message){ %>
+        <h3 class="sub-heading text-2xl"><%= locals.message %> </h3>
+    <% } %>
+    <% if(locals.error){ %>
+        <h3 class="sub-heading text-2xl"> <%= locals.error %></h3>
+    <% } %>
+</section>
+
+
+    
+
+
+<!-- Certificate search box section start -->
+<section class="login py-2" >
+
+    <form action="/university/certificate/delete" method="POST">
+   
+        <div class="inputBox" >
+            <div class="input" style="width:800px;">
+                <label for="uniqueID" style="font-size:25px">Enter Certificate ID</label>
+                <input  id="uniqueID" name="uniqueID" list='student-ids' type="text" placeholder="Enter Certificate ID to verify">
+                <% if(studentCount !== 0){ %>
+                    <datalist id="student-ids">
+                        <% studentIDs.foreach(function(id){ %>
+                            <option value= <%=id.student_id %> > 
+                                <%=id.student_id %>
+                            </option>
+                            
+                        <% }) %>
+                    </datalist>
+                    
+                <% } %>
+            </div>
+            
+        </div>
+        <button type="submit" class="btn">Send Request to Delete</button>
+        
+    </form>

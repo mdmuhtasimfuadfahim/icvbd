@@ -1,0 +1,111 @@
+    <!-- registration section start -->
+    <section class="registration py-20" >
+
+        <h3 class="sub-heading"> UNIVERSITY REGISTRATION </h3>
+        <h1 class="heading"> Please fill up the Form for completing registration </h1>
+        
+        <form action="/university/registration" method="POST">
+            <% if(messages.error) { %>
+                <span class="text-red-500 text-2xl font-bold"><%= messages.error %></span>
+            <% } else { %>
+                <span class="text-green-500 text-2xl font-bold"><%= messages.success %></span>
+            <% } %>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="uniName">university name</label>
+                    <input name="uniName" id="uniName" value="<%= messages.uniName %>" type="text" placeholder="enter university name">
+                </div>
+                <div class="input">
+                    <label for="UGCID">UGC ID</label>
+                    <input id="UGCID" name="UGCID" value="<%= messages.UGCID %>" type="text" placeholder="enter UGC id">
+                </div>
+            </div>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="district">district</label>
+                    <input name="district" id="district" value="<%= messages.district %>" type="text" placeholder="enter district name">
+                </div>
+                <div class="input">
+                    <label for="city">city</label>
+                    <input id="city" name="city" value="<%= messages.city %>" type="text" placeholder="enter city name">
+                </div>
+            </div>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="zipcode">zip code</label>
+                    <input name="zipcode" id="zipcode" value="<%= messages.zipcode %>" type="text" placeholder="enter zip code">
+                </div>
+                <div class="input">
+                    <label for="phoneOne">contact number one</label>
+                    <input id="phoneOne" name="phoneOne" value="<%= messages.phoneOne %>" type="text" placeholder="enter contact number">
+                </div>
+            </div>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="phonetwo">contact number two</label>
+                    <input id="phonetwo" name="phonetwo" value="<%= messages.phonetwo %>" type="text" placeholder="enter contact number">
+                </div>
+                <div class="input">
+                    <label for="phonethree">contact number three</label>
+                    <input id="phonethree" name="phonethree" value="<%= messages.phonethree %>" type="text" placeholder="enter contact number">
+                </div>
+            </div>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="officialemail">official email</label>
+                    <input name="officialemail" id="officialemail" value="<%= messages.officialemail %>" type="text" placeholder="enter official email">
+                </div>
+                <div class="input">
+                    <label for="emailDomain">email domain</label>
+                    <input name="emailDomain" id="emailDomain" value="<%= messages.emailDomain %>" type="text" placeholder="enter university domain">
+                </div>
+            </div>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="nameOne">first creator name</label>
+                    <input id="nameOne" name="nameOne" value="<%= messages.nameOne %>" type="text" placeholder="enter first creator name">
+                </div>
+                <div class="input">
+                    <label for="emailOne">first creator varsity email(Maker)</label>
+                    <input id="emailOne" name="emailOne" value="<%= messages.emailOne %>" type="text" placeholder="enter first creator email">
+                </div>
+            </div>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="designationOne">first creator designation</label>
+                    <input id="designationOne" name="designationOne" value="<%= messages.designationOne %>" type="text" placeholder="enter first creator designation">
+                </div>
+                <div class="input">
+                    <label for="nameTwo">second creator name(Checker)</label>
+                    <input id="nameTwo" name="nameTwo" value="<%= messages.nameTwo %>" type="text" placeholder="enter second creator name">
+                </div>
+            </div>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="emailTwo">second creator varsity email(Checker)</label>
+                    <input id="emailTwo" name="emailTwo" value="<%= messages.emailTwo %>" type="text" placeholder="enter second creator email">
+                </div>
+                <div class="input">
+                    <label for="designationTwo">second creator designation(Checker)</label>
+                    <input id="designationTwo" name="designationTwo" value="<%= messages.designationTwo %>" type="text" placeholder="enter second creator designation">
+                </div>
+            </div>
+            <div class="inputBox">
+                <div class="input">
+                    <label for="password">Maker password</label>
+                    <input id="password" name="password" type="password" placeholder="****************">
+                </div>
+                <div class="input">
+                    <label for="checkerPass">Checker password</label>
+                    <input id="checkerPass" name="checkerPass" type="password" placeholder="*****************">
+                </div>
+            </div>
+
+              <button type="submit" class="btn">Registration</button>
+              <a href="/university/login">Already have account?</a>
+              <a class="float-right mt-6" href="/registration">Go Back</a>
+
+        </form>
+        
+    </section>
+    <!-- registration section end -->

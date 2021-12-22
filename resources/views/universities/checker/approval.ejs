@@ -1,0 +1,107 @@
+<section class="home-content">
+    <h3 class="sub-heading"> Checker account requests </h3>
+    <h1 class="heading"> Checker Account </h1>
+    <a class="mr-20 float-right text-4xl" href="/university/accounts/completed"><i class="fas fa-angle-double-right"></i></a>
+  <div class="table-wrapper">
+    <div class="new-table w-full mx-auto table-certificate">
+      
+      <div class="table-row table-header">
+        <div class="cell">
+          First Name
+        </div>
+        <div class="cell">
+          Last Name
+        </div>
+        <div class="cell">
+          Date of Birth
+        </div>
+        <div class="cell">
+          University Name
+        </div>
+        <div class="cell">
+          Student Email
+        </div>
+        <div class="cell">
+          Student ID
+        </div>
+        <div class="cell">
+          Contact
+        </div>
+        <div class="cell">
+          Address
+        </div>
+        <div class="cell">
+          Registration Status
+        </div>
+        <div class="cell">
+          Verify Status
+        </div>
+        <div class="cell">
+          Registration Date
+        </div>
+      </div>
+      <% account.forEach(function(account) { %>
+      <div class="table-row table-body">
+        <div class="cell" data-title="First Name">
+          <%= account.firstName %>
+       </div>
+       <div class="cell" data-title="Last Name">
+          <%= account.lastName %>
+       </div>
+       <div class="cell" data-title="Date of Birth">
+          <%= moment(account.dob).format('DD:MM:YYYY') %>
+       </div>
+       <div class="cell" data-title="University Name">
+          <%= account.uniName %>
+       </div>
+       <div class="cell" data-title="Student Email">
+          <%= account.studentEmail %>
+       </div>
+       <div class="cell" data-title="Student ID">
+          <%= account.studentID %>
+       </div>
+       <div class="cell" data-title="Contact">
+          <%= account.phone %>
+       </div>
+       <div class="cell" data-title="Address">
+          <%= account.address %>
+       </div>
+       <div class="cell" data-title="Registration Status">
+           <div class="inline-block relative w-64 text-left">
+           <form action="/university/accounts/approval" method="POST">
+               <input type="hidden" name="accountId" value="<%= account._id %>">
+               <select name="registrationStatus" onchange="this.form.submit()"
+                   class="block appearance-none w-full bg-white baccount baccount-gray-400 hover:baccount-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                   <option value="not_approved"
+                       <%= account.registrationStatus === 'not_approved' ? 'selected' : '' %>>
+                       Not Approved</option>
+                   <option value="approved" <%= account.registrationStatus === 'approved' ? 'selected' : '' %>>
+                       Approved</option>
+               </select>
+           </form>
+           <div
+               class="pointer-events-none absolute inset-y-0 right-0 flex items-left px-2 text-gray-700">
+               <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                   viewBox="0 0 20 20">
+                   <path
+                       d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+               </svg>
+           </div>
+           </div>
+       </div>
+       <div class="cell" data-title="Verify Status">
+          <%= account.inVerified %>
+       </div>
+       <div class="cell" data-title="Registration Date">
+          <%= moment(account.createdAt).format('DD:MM:YYYY') %>
+       </div>
+       
+      </div> 
+      <% }) %>
+         
+    </div>    
+  </div>
+  <div class="m-10">
+    <a class="float-right mt-6 text-2xl" href="/university/dashboard">Go Back</a>
+  </div>
+</section>

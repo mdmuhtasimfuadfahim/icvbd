@@ -1,0 +1,38 @@
+<section class="home-content py-20">
+    <div class="overview-boxes">
+      <div class="box">
+        <div class="right-side">
+          <a href="/student/account" class="box-topic">My Account</a>
+        </div>
+      </div>
+      <div class="box">
+        <div class="right-side">
+          <a href="/student/certificate" class="box-topic"> My Certificate</a>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="right-side">
+          <a href="#" class="box-topic"> Additional</a>
+        </div>
+      </div>
+     
+    </div>
+      <div class="sales-boxes">
+          <div class="recent-sales box">
+            <div class="title">Records</div>
+            <div class="text-3xl">
+              <% if (student.registrationStatus === "not_verified") { %>
+                <p> Your certificate has not been verified yet.  </p>
+              <% } %>
+
+              <% if (student.registrationStatus !== "not_verified") { %>
+                <p> Congrats!! Your student account  has been verified</p>
+                
+              <% } %>
+              <p>Check Your  Certitificate Status from Menu</p>
+            </div>
+          </div>
+          
+        </div>
+</section>

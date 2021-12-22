@@ -1,0 +1,184 @@
+<!-- Certificate Section Start -->
+<section class="home-content py-20">
+    <section class="ml-20 certificate_container py-20">
+            
+            <h3 class="sub-heading"> Certificate Creation </h3>
+            <h1 class="heading"> create a certificate </h1>
+             
+            <form action="/university/certificate/create" method="POST">
+                <% if(messages.error) { %>
+                    <span class="text-red-500 text-4xl font-bold"><%= messages.error %></span>
+                <% } else { %>
+                    <span class="text-green-500 text-4xl font-bold"><%= messages.success %></span>
+                <% } %>
+                <div class="row">
+                    <h4 class="mb-10">Certificate Creation Form</h4>
+                    <div class="input-group input-group-icon">
+                        <input type="hidden" name="id" value="">
+                        <input type="text" name="full_name" value="<%= messages.full_name %>" placeholder="Full Name">
+                        <span class="input-icon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-icon">
+                        <input type="text" name="email_address" value="<%= messages.email_address %>" placeholder="Academic Email Address">
+                        <span class="input-icon">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-icon">
+                        <input type="text" name="email_address_personal" value="<%= messages.email_address %>" placeholder="Personal Email Address">
+                        <span class="input-icon">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-icon">
+                        <input type="text" name="student_id" value="<%= messages.student_id %>" placeholder="Student ID">
+                        <span class="input-icon">
+                            <i class="far fa-id-badge"></i>
+                        </span>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h5>Required Credit</h5>
+                            <div class="input-group">
+                                <div class="input-group">
+                                    <input type="radio" name="credit" id="credit-completed" value="completed" 
+                                    <% if(messages.credit === "completed"){ %>
+                                        <%= 'checked' %>
+                                    <% } %>>
+                                    <label for="credit-completed">Completed</label>
+                                    <input type="radio" name="credit" id="credit-incompleted" value="incompleted"
+                                    <% if(messages.credit === "incompleted"){ %>
+                                        <%= 'checked' %>
+                                    <% } %>>
+                                    <label for="credit-incompleted">Incompleted</label>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <h5>Required Courses</h5>
+                            <div class="input-group">
+                                <input type="radio" name="courses" id="courses-completed" value="completed" <%= messages.courses === 'completed' ? 'checked' : 'unchecked' %>>
+                                <label for="courses-completed">Completed</label>
+                                <input type="radio" name="courses" id="courses-incompleted" value="incompleted" <%= messages.courses === 'incompleted' ? 'checked' : 'unchecked' %>>
+                                <label for="courses-incompleted">Incompleted</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h5>University Name</h5>
+                            <div class="input-group">
+                                <select name="university_name" id="">
+                                    <option value="Univeristy of Liberal Arts Bangladesh" <%= messages.university_name ? 'selected' : '' %>>Univeristy of Liberal Arts Bangladesh</option>
+                                    <option value="North South University" <%= messages.university_name ? 'selected' : '' %>>North South University</option>
+                                    <option value="Daffodil International University" <%= messages.university_name ? 'selected' : '' %>>Daffodil International University</option>
+                                    <option value="United International University" <%= messages.university_name ? 'selected' : '' %>>United International University</option>
+                                    <option value="BRAC University" <%= messages.university_name ? 'selected' : '' %>>BRAC University</option>
+                                    <option value="ASA University of Bangladesh" <%= messages.university_name ? 'selected' : '' %>>ASA University Bangladesh</option>
+                                    <option value="University of Khulna" <%= messages.university_name ? 'selected' : '' %>> University of Khulna</option>
+                                    <option value="University of Barishal" <%= messages.university_name ? 'selected' : '' %>> University of Barishal</option>
+                                    <option value="University of Chittagong" <%= messages.university_name ? 'selected' : '' %>> University of Chittagong</option>
+                                    <option value="University of Noakhali" <%= messages.university_name ? 'selected' : '' %>> University of Noakhali</option>
+                                    <option value="University of Narsingdi" <%= messages.university_name ? 'selected' : '' %>> University of Narsingdi</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <h5>Major</h5>
+                            <div class="input-group">
+                                <select name="major" id="">
+                                    <option value="CSE" <%= messages.major ? 'selected' : '' %>>CSE</option>
+                                    <option value="EEE" <%= messages.major ? 'selected' : '' %>>EEE</option>
+                                    <option value="BBA" <%= messages.major ? 'selected' : '' %>>BBA</option>
+                                    <option value="MSJ" <%= messages.major ? 'selected' : '' %>>MSJ</option>
+                                    <option value="Law" <%= messages.major ? 'selected' : '' %>>Law</option>
+                                    <option value="English" <%= messages.major ? 'selected' : '' %>>English</option>
+                                </select>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h5>CGPA</h5>
+                                <div class="input-group">
+                                    <div class="">
+                                        <input name="cgpa" value="<%= messages.cgpa %>" type="text" placeholder="3.50">
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <h5>Minor</h5>
+                            <div class="input-group">
+                                <select name="minor" id="">
+                                    <option value="CSE" <%= messages.minor ? 'selected' : '' %>>CSE</option>
+                                    <option value="EEE" <%= messages.minor ? 'selected' : '' %>>EEE</option>
+                                    <option value="BBA" <%= messages.minor ? 'selected' : '' %>>BBA</option>
+                                    <option value="MSJ" <%= messages.minor ? 'selected' : '' %>>MSJ</option>
+                                    <option value="Law" <%= messages.minor ? 'selected' : '' %>>Law</option>
+                                    <option value="English" <%= messages.minor ? 'selected' : '' %>>English</option>
+                                </select>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h5>Gender</h5>
+                            <div class="input-group">
+                                <input type="radio" name="gender" id="gender-male" value="male" <%= messages.gender === 'male' ? 'checked' : '' %>>
+                                <label for="gender-male">Male</label>
+                                <input type="radio" name="gender" id="gender-female" value="female" <%= messages.gender === 'female' ? 'checked' : '' %>>
+                                <label for="gender-female">Female</label>
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <h5>Date of Birth</h5>
+                            <div class="input-group">
+                                <label for="dob"></label>
+                                <input type="date" name="dob" type="text">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h5>Date of Admission</h5>
+                            <div class="input-group">
+                                <label for="doa"></label>
+                                <input type="date" name="doa" type="text">
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <h5>Date of Graduation</h5>
+                                <div class="input-group">
+                                    <label for="dog"></label>
+                                    <input type="date" name="dog" type="text">
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h5>Father's Name(Optional)</h5>
+                            <div class="input-group">
+                                <label for="father"></label>
+                                <input  name="father_name" type="text">
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <h5>Mother's Name(Optional)</h5>
+                                <div class="input-group">
+                                    <label for="mother"></label>
+                                    <input  name="mother_name" type="text">
+                                </div>
+                        </div>
+                    </div>
+
+                </div>
+                <button type="submit" class="btn">Submit Form</button>
+                <a class="float-right mt-6 text-2xl" href="/university/certificate/table">Go Back</a>
+            </form>
+        </section>
+    </section>
+    
+    <!-- Certificate Section End -->

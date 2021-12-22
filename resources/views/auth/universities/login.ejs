@@ -1,0 +1,42 @@
+    <!-- login section start -->
+    <section class="login py-20" >
+
+        <h3 class="sub-heading"> university login </h3>
+        <h1 class="heading"> login to continue </h1>
+    
+        <form action="/university/login" method="POST">
+            <% if(messages.error) { %>
+                <span class="text-red-500 text-2xl font-bold"><%= messages.error %></span>
+            <% } %>
+            <div class="inputBox">
+                <div class="input">
+                    <input type="hidden" name="universityId" value="<%= university._id %>">
+                    <label for="officialemail">Registered Official University Email</label>
+                    <input id="officialemail" name="officialemail" value="<%= messages.officialemail %>" type="officialemail" placeholder="enter your Official email">
+                </div>
+                <div class="input">
+                    <input type="hidden" name="universityId" value="<%= university._id %>">
+                    <label for="employeeEmail">Your email</label>
+                    <input id="employeeEmail" name="employeeEmail" value="<%= messages.employeeEmail %>" type="employeeEmail" placeholder="enter your Checker or Makeremail">
+                </div>
+
+                <div class='input'>
+                    <label class="block text-left" style="max-width: 400px;">Select Checker/Maker</label>
+                    <select class='form-control text-2xl' style="min-width: 400px;" name='userType'>
+                        <option value="checker" >Checker</option>
+                        <option value="maker">Maker</option>           
+                    </select>
+                </div>
+
+                <div class="input">
+                    <label for="password">your password</label>
+                    <input name="password" id="password" type="password" placeholder="********************">
+                </div>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <a href="/university/registration">Don't have account?</a>
+            <a class="float-right mt-6" href="/login">Go Back</a>
+        </form>
+    
+    </section>
+    <!-- login section end -->

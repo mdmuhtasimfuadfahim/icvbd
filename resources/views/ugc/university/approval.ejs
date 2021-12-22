@@ -1,0 +1,165 @@
+<section class="home-content" style="margin-left:240px">
+      <h3 class="sub-heading"> UNIVERSITY ACCOUNT REQUESTS </h3>
+      <h1 class="heading"> Approve/Disapprove </h1>
+      <h3 class="sub-heading"> 
+        <% if(numOfAccounts === 0) { %>
+          <span class="text-red-500 text-2xl font-bold">No Pending Accounts at this moment</span>
+        <% } %>
+      </h3>
+      <a class="mr-20 float-right text-3xl" href="/ugc/accounts/other/request">View Corporate Pending Requests  &nbsp;<i class="fas fa-angle-double-right"></i></a>
+      <a class="mr-20 float-left text-3xl" href="#"><i class="fas fa-video"></i>&nbsp;Watch Tutorial?</a>
+      <div class="table-wrapper">
+      <div class="new-table w-full mx-auto table-certificate">
+        
+        <div class="table-row table-header">
+          <div class="cell">
+            Click to Select Registration Status
+          </div>
+
+          <div class="cell">
+            University Name
+          </div>
+          <div class="cell">
+            UGC ID
+          </div>
+          <div class="cell">
+            District
+          </div>
+          <div class="cell">
+            City
+          </div>
+          <div class="cell">
+            Zipcode
+          </div>
+          <div class="cell">
+            Phone Number 1
+          </div>
+          <div class="cell">
+            Phone Number 2
+          </div>
+          <div class="cell">
+            Phone Number 3
+          </div>
+          <div class="cell">
+            Official Email
+          </div>
+          <div class="cell">
+            Email Domain
+          </div>
+          <div class="cell">
+            First Creator Name
+          </div>
+          <div class="cell">
+            First Creator Email
+          </div>
+          <div class="cell">
+            First Creator Designation
+          </div>
+          <div class="cell">
+            Second Creator Name
+          </div>
+          <div class="cell">
+            Second Creator Email
+          </div>
+          <div class="cell">
+            Second Creator Designation
+          </div>
+          
+          <div class="cell">
+            Verify Status
+          </div>
+          <div class="cell">
+            Registration Date
+          </div>
+        </div>
+        <% account.forEach(function(account) { %>
+        <div class="table-row table-body">
+          <div class="cell" data-title="Registration Status">
+            <div class="inline-block relative w-64 text-left">
+            <form action="/ugc/accounts/approval" method="POST">
+                <input type="hidden" name="accountId" value="<%= account._id %>">
+                <select name="registrationStatus" onchange="this.form.submit()"
+                    class="block appearance-none w-full bg-white baccount baccount-gray-400 hover:baccount-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="not_approved"
+                        <%= account.registrationStatus === 'not_approved' ? 'selected' : '' %>>
+                        Not Approved</option>
+                    <option value="approved" <%= account.registrationStatus === 'approved' ? 'selected' : '' %>>
+                        Approved</option>
+                </select>
+            </form>
+            <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-left px-2 text-gray-700">
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20">
+                    <path
+                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
+            </div>
+            </div>
+        </div>
+          <div class="cell" data-title="University Name">
+            <%= account.uniName %>
+         </div>
+         <div class="cell" data-title="UGC ID">
+            <%= account.UGCID %>
+         </div>
+         <div class="cell" data-title="District">
+            <%= account.district %>
+         </div>
+         <div class="cell" data-title="City">
+            <%= account.city %>
+         </div>
+         <div class="cell" data-title="Zipcode">
+            <%= account.zipcode %>
+         </div>
+         <div class="cell" data-title="Phone Number 1">
+            <%= account.phoneOne %>
+         </div>
+         <div class="cell" data-title="Phone Number 2">
+            <%= account.phonetwo %>
+         </div>
+         <div class="cell" data-title="Phone Number 3">
+            <%= account.phonethree %>
+         </div>
+         <div class="cell" data-title="Official Email">
+            <%= account.officialemail %>
+         </div>
+         <div class="cell" data-title="Email Domain">
+            <%= account.emailDomain %>
+         </div>
+         <div class="cell" data-title="First Creator Name">
+            <%= account.nameOne %>
+         </div>
+         <div class="cell" data-title="First Creator Email">
+            <%= account.emailOne %>
+         </div>
+         <div class="cell" data-title="First Creator Designation">
+            <%= account.designationOne %>
+         </div>
+         <div class="cell" data-title="Second Creator Name">
+            <%= account.nameTwo %>
+         </div>
+         <div class="cell" data-title="Second Creator Email">
+            <%= account.emailTwo %>
+         </div>
+         <div class="cell" data-title="Second Creator Designation">
+            <%= account.designationTwo %>
+         </div>
+         
+         <div class="cell" data-title="Verify Status">
+            <%= account.inVerified %>
+         </div>
+         <div class="cell" data-title="Registration Date">
+            <%= moment(account.createdAt).format('DD:MM:YYYY') %>
+         </div>
+         
+        </div> 
+        <% }) %>
+           
+      </div>    
+    </div>
+    <div class="m-10">
+      <a class="float-right mt-6 text-2xl" href="/ugc/dashboard">Go Back</a>
+    </div>
+  </section>
+  

@@ -1,0 +1,68 @@
+<section class="home-content" style="margin-left:240px">
+    <h3 class="sub-heading"> Control Access to Create Certificate </h3>
+    <h1 class="heading"> Restrict or Allow Universities </h1>
+    <a class="rotate-180 ml-20 float-left text-4xl" href="/ugc/accounts/completed"><i class="fas fa-angle-double-right"></i></a>
+    
+
+<!-- Bulk Certificate search option by hash search box section start -->
+<section class="login py-2" >
+
+    <form action="/ugc/university/restrict" method="POST" id="accessControForm">
+
+
+        <div class="inputBox" >
+            <div class="input" style="width:800px;">
+                <label class="block text-left" style="max-width: 800px">
+                    <span class="text-gray-700 text-4xl">Select a varsity to Restrict or Allow access</span>
+                    <br>
+                    <select class="form-select block w-full mt-1">
+                      <option>Click to select</option>
+                      <option>University of Barishal</option>
+                      <option>University of Khulna</option>
+                      <option>University of Liberal Arts</option>
+                      <option>North South University</option>
+                    </select>
+                  </label>
+            </div>
+            <br><br>
+            
+            
+            
+        </div>
+
+        <div class="block text-4xl mt-10 mb-10">
+            <span class="text-gray-700">Allow or Restrict?</span>
+            
+            <div class="mt-2">
+               <div>
+                 <label class="inline-flex items-center">
+                      <input type="radio" class="form-radio" name="radio" value="allow" />
+                      <span class="ml-2">Allow</span>
+                  </label>
+                </div>
+              <div>
+                <label class="inline-flex items-center">
+                  <input
+                    type="radio"
+                    class="form-radio"
+                    name="radio"
+                    value="restrict"
+                    checked
+                  />
+                  <span class="ml-2">Restrict</span>
+                </label>
+              </div>
+              
+              
+            </div>
+          </div>
+        
+        <button type="submit" class="btn">Save Changes</button>
+        
+    </form>
+    
+           
+      
+      
+  </section>
+  
