@@ -236,10 +236,10 @@ function studentAuthController(){
                 req.flash('error','Something went wrong. Try again please')
                 res.redirect('/student/login')
             }
-            console.log(req.session.user)
-            const certificate = await Certificate.findOne({student_id: '11712280'},(err,result)=>{
+            console.log(req.session.user.studentID)
+            const certificate = await Certificate.findOne({student_id: req.session.user.studentID},(err,result)=>{
                 if(result){
-                   console.log(result)
+                   //console.log(result)
                    res.render('students/mycertificate',{certificate:result,moment:moment,empty:false})
                 }else{
                    console.log('Reached this point')
