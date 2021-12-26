@@ -3,7 +3,7 @@
     <section class="ml-20 certificate_container py-20">
             
             <h3 class="sub-heading"> Certificate Creation </h3>
-            <h1 class="heading"> create a certificate </h1>
+            <h1 class="heading"> Fill up the form create a certificate </h1>
              
             <form action="/university/certificate/create" method="POST">
                 <% if(messages.error) { %>
@@ -71,17 +71,8 @@
                             <h5>University Name</h5>
                             <div class="input-group">
                                 <select name="university_name" id="">
-                                    <option value="Univeristy of Liberal Arts Bangladesh" <%= messages.university_name ? 'selected' : '' %>>Univeristy of Liberal Arts Bangladesh</option>
-                                    <option value="North South University" <%= messages.university_name ? 'selected' : '' %>>North South University</option>
-                                    <option value="Daffodil International University" <%= messages.university_name ? 'selected' : '' %>>Daffodil International University</option>
-                                    <option value="United International University" <%= messages.university_name ? 'selected' : '' %>>United International University</option>
-                                    <option value="BRAC University" <%= messages.university_name ? 'selected' : '' %>>BRAC University</option>
-                                    <option value="ASA University of Bangladesh" <%= messages.university_name ? 'selected' : '' %>>ASA University Bangladesh</option>
-                                    <option value="University of Khulna" <%= messages.university_name ? 'selected' : '' %>> University of Khulna</option>
-                                    <option value="University of Barishal" <%= messages.university_name ? 'selected' : '' %>> University of Barishal</option>
-                                    <option value="University of Chittagong" <%= messages.university_name ? 'selected' : '' %>> University of Chittagong</option>
-                                    <option value="University of Noakhali" <%= messages.university_name ? 'selected' : '' %>> University of Noakhali</option>
-                                    <option value="University of Narsingdi" <%= messages.university_name ? 'selected' : '' %>> University of Narsingdi</option>
+                                    <option value="Univeristy of Liberal Arts Bangladesh" <%= user.uniName ? 'selected' : '' %>> <%= user.uniName%>   </option>
+            
                                 </select>
                             </div>
                         </div>
