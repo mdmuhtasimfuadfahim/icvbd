@@ -58,6 +58,7 @@ function emailToStudent(certificate_id,email_address_personal='get.mitun@gamil.c
 /* Creates Certificate */ 
 function universityCertificateController(){
     return{
+        /* Shows certificate creation form  */ 
         fromRender(req, res){
             res.render('universities/certificate/createForm',{user:req.session.user})
         },
@@ -77,12 +78,13 @@ function universityCertificateController(){
 
         /*******Certificate Creation by Maker *****/
         createCertificate(req, res){
+            console.log(req.body)
             const { full_name, email_address, email_address_personal, student_id, credit, courses, university_name, major, cgpa, minor, dob, gender, doa, dog,father_name,mother_name } = req.body
             //console.log(req.body)
            
             /*------------validate request----------*/
-            if(!full_name || !email_address || !student_id || !credit || !courses || !university_name || !major || !cgpa || !minor || !dob|| !gender || !doa || !dog || !father_name|| !mother_name){
-                req.flash('error', 'All Fields are Required for Cerating a Certificate')
+            if(!full_name || !email_address || !student_id || !credit || !courses || !university_name || !major || !cgpa || !minor || !dob|| !gender || !doa || !dog ){
+                req.flash('error', 'All Fields are Required for Creating a Certificate')
                 req.flash('full_name', full_name)
                 req.flash('email_address', email_address)
                 req.flash('email_address_personal', email_address_personal)
