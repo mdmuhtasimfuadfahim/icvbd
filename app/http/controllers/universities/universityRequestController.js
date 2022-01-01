@@ -77,7 +77,7 @@ function universityRequestController(){
         
         /* Displays intra-organization logs */ 
         async varsityLogDisplay(req,res){
-            Log.find({uniName:req.session.user.uniName},(err,result)=>{
+            Log.find({uniName:req.session.user.uniName},null, {sort: { 'createdAt': -1 }},(err,result)=>{
                 if (err)
                     console.log(err)
                 else{
@@ -87,6 +87,8 @@ function universityRequestController(){
             })
             
         },
+
+        
 
 
     }

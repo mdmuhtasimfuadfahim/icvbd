@@ -82,9 +82,14 @@ function initRoutes(app){
     app.post('/university/accounts/approval', universityRequestController().accountApproval)
     app.get('/university/accounts/completed', universityRequestController().showCompleted)
 
+    app.post('/certificate-comment/save', universityCertificateController().certCommentPost)
+    app.get('/university/certificate-details/:certId',universityCertificateController().singleCertificateDisplay)
     app.get('/university/certificate/delete', universityRequestController().certificateDeleteForm)
+    
+    app.get('/university/certificate-filter/display',universityCertificateController().certificateFilterDisplay)
+    app.post('/university/certificate-filter/process',universityCertificateController().certificateFilterProcess)
+    
     app.post('/university/certificate/delete', universityRequestController().certificateDeletePost)
-
     app.get('/university/log', universityRequestController().varsityLogDisplay)
     
 
@@ -113,6 +118,7 @@ function initRoutes(app){
     app.post('/ugc/university/restrict',ugcRequestController().restrictUniversityPost)
     app.get('/ugc/university/restricted-list',ugcRequestController().restrictedUniversityList)
     app.get('/ugc/university/logs',ugcRequestController().varsityLogDisplay)
+    
 
     app.get('/ugc/admin/create-faq',ugcRequestController().createQA)
     app.post('/ugc/admin/create-faq',ugcRequestController().createQA)
@@ -125,12 +131,14 @@ function initRoutes(app){
     app.get('/exp/session-destroy',  universityAuthController().sessionDestroy)
     app.get('/exp/fetch',  universityAuthController().fetchData)
     app.get('/exp/fetch-university',  universityAuthController().fetchUniversity)
+    app.get('/exp/fetch-university-names',  universityAuthController().fetchUniNames)
     app.get('/exp/fetch-student',  studentAuthController().fetchData)
     app.get('/exp/edit-student',  studentAuthController().editData)
     app.get('/exp/fetch-other',  otherAuthController().fetchData)
     app.get('/exp/fetch-certificate', homeController().fetchCertificate)
     app.get('/exp/fetch-ugc', ugcAuthController().fetchUGC)
     app.get('/exp/send-email', universityCertificateController().sendEmailToStudent)
+    app.get('/exp/send-email2', universityCertificateController().sendEmailToStudentSendGrid)
     app.get('/exp/show-cert-delete-request', ugcRequestController().certificateDeleteRequestShow)
     app.get('/exp/cert-bulk-update', ugcRequestController().certificateBulkUpdateCron)
     app.get('/exp/fetch-log', universityAuthController().fetchLog)

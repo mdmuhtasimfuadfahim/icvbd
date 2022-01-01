@@ -94,7 +94,7 @@ function ugcRequestController(){
         /* displays logs of university users */ 
         async varsityLogDisplay(req,res){
             let logs = false
-            Log.find({},(err,result)=>{
+            Log.find({},null, {sort: { 'createdAt': -1 }},(err,result)=>{
                 if (err)
                     console.log(err)
                 else{

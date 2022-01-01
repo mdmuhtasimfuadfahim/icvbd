@@ -53,30 +53,29 @@
                         </span>
                     </div>
 
-                    <div class="row mt-4">
-                        <div class="col-half">
-                            <h5>Your CGPA </h5>
-                            <div class="input-group">
-                                    <h5><%= certificate.cgpa %></h5>
-                            </div>
-                        </div>
+                    
+                    <ul class="list-disc text-2xl">
+                        <li class="mb-5">University Name: <span class="font-bold"><%= certificate.university_name%></span></li>
+                        <li class="mb-5">Full Name: <span class="font-bold"><%= certificate.full_name%></span></li>
+                        <li class="mb-5">Required Credits: <span class="font-bold capitalize"><%= certificate.credit %></span></li>
+                        <li class="mb-5">Date of Birth:<span class="font-bold"> <%= moment(certificate.dob).format('MMMM Do, YYYY') %></span></li>
+                        <li class="mb-5">Required Credits: <span class="font-bold"><%= certificate.credit %></span></li>
+                        <li class="mb-5">Date of Admission:<span class="font-bold"> <%= moment(certificate.doa).format('MMMM Do, YYYY') %></span></li>
+                        <li class="mb-5">Date of Graduation<span class="font-bold"> <%= moment(certificate.dog).format('MMMM Do, YYYY') %></span></li>
+                        <li class="mb-5">Father's Name: <span class="font-bold"><%= certificate.father_name%></span></li>
+                        <li class="mb-5">Mother's Name: <span class="font-bold"><%= certificate.mother_name%></span></li>
                         
-                    </div>
-
-                    <div class="row mt-4">
-                        <div class="col-half">
-                            <h5>Your date of graduation is  </h5>
-                            <div class="input-group">
-                                <h5><%= certificate.dog_d %>-<%= certificate.dog_m %>-<%= certificate.dog_y %></h5>
-                            </div>
-                        </div>
+                        <!-- ... -->
+                    </ul>
+                    
+                    
                         
-                    </div>
-                   
+                    </form>
+                    
                    
                 </div>
-                <div class="btn"></div>
-                <a class="float-right mt-6 text-2xl" href="/student/dashboard">Go Back</a>
+                
+                <a class="float-right mt-10 text-2xl " href="/student/dashboard">Go Back</a>
             </form>
             <%}%>
         

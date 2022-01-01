@@ -10,6 +10,11 @@ const certificateSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Student'
     },
+
+    comments:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment'
+    }],
     uniqueID: {type: String, required: true, unique: true},
     full_name:{type: String, required: true,trim:true},
     email_address:{type: String, required: true, unique: true, lowercase: true,trim:true},
@@ -28,7 +33,7 @@ const certificateSchema = new Schema({
     hash: {type: String, required: true},
     father_name:{type: String, trim:true,default:'not available'},
     mother_name:{type: String, trim:true,default:'not available'},
-    isVerified: {type: String, default: 'not_verified'},
+    isVerified: {type: String, default: 'not_verified'}, //maybe 'approved' and 'not_verified' are two values for this 
     deleteRequest: {type: String},
     created_at: {type: Date, default: Date.now},
     updated_at: {type: Date, default: Date.now}

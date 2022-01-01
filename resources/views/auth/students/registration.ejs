@@ -3,8 +3,11 @@
 
         <h1 class="heading"> Student Registration Form </h1>
         <h3 class="sub-heading">Please properly fill and submit form to complete registration </h3>
-        
-        
+        <% if (uniNames) { %>
+            <h1 class="heading"> <%= uniNames.length %></h1>
+        <% }else{ %>
+        <h1 class="heading"> <%= uniNames.length %></h1>
+        <% } %>
         
         
         <form action="/student/registration" method="POST">
@@ -41,11 +44,8 @@
                 <div class="input">
                     <label for="uniName">University Name</label>
                     <select name="uniName" id="" class="select-box">
-                        <option value="University of Liberal Arts Bangladesh">University of Liberal Arts Bangladesh</option>
-                        <option value="University of Khulna">University of Khulna</option>
-                        <option value="University of Barishal">University of Barishal</option>
-                        <option value="University of Narsingdi">University of Narsingdi</option>
-                        <option value="University of Chittagong">University of Chittagong</option>
+                        
+                
                     </select> 
                 </div>
             </div>

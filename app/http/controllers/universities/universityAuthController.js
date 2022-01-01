@@ -530,6 +530,23 @@ function universityAuthController(){
         },
 
         /* For experimental purpose only */
+        async fetchUniNames(req,res){
+            let univ
+            let exp = false 
+            await University.find({},'uniName',(err,res)=>{
+                if(err)
+                    console.log(err)
+                else{
+                    univ = res
+                    exp  = true
+                    console.log(res)
+                }
+            })
+           
+            
+        },
+
+        /* For experimental purpose only */
         async fetchLog(req,res){
             uniEventLogger('','','')
             await Log.find({},(err,res)=>{

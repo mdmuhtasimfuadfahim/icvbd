@@ -4,10 +4,12 @@ const { v4:  uuid} = require('uuid')
 const Certificate = require('../../../models/certificate')
 const Student = require('../../../models/student')
 const Log = require('../../../models/logging')
+const Comment = require('../../../models/comment')
 const moment = require('moment')
 const axios = require('axios')
 const { debuglog } = require('util')
 var nodemailer = require('nodemailer')
+const sgMail = require('@sendgrid/mail')  //Sendgrid Transactional Email
 
 
 async  function uniEventLogger(uniName,loggerText,official){
@@ -65,7 +67,7 @@ function universityCertificateController(){
         /* Shows a list of approved certificate */ 
         async tableRender(req, res){
             const certificate = await Certificate.find({university_name:req.session.user.uniName,isVerified:'approved'})
-            res.render('universities/certificate/certifcateTable', {certificate: certificate, moment: moment,user:req.session.user})
+            res.render('universities/certificate/certificateTable2', {certificate: certificate, moment: moment,user:req.session.user})
         },
         updateForm(req, res){
             axios.get(`${process.env.APP_BASE_URL}/university/certificate/update`, { params : { id : req.query.id }}).then((certificateData) =>{
@@ -362,6 +364,187 @@ function universityCertificateController(){
                   console.log('Email sent: ' + info.response);
                 }
               });
+        },
+
+        /*** Experimental */
+        async sendEmailToStudentSendGrid(req,res){
+            
+            sgMail.setApiKey('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')
+            const msg = {
+            to: 'get.mitun@gmail.com', // Change to your recipient
+            from: 'official.contact.ugc@gmail.com', // Change to your verified sender
+            subject: 'Sending with SendGrid is Fun',
+            text: 'and easy to do anywhere, even with Node.js',
+            html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+            }
+            sgMail
+            .send(msg)
+            .then(() => {
+                console.log('Email sent')
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+
+
+
+        },
+
+
+        /* Display a single certificate where users can comment */ 
+        async singleCertificateDisplay(req,res){
+
+           var studentID = req.params.certId
+           var certificateID = req.params.certId //assigned only for clarity
+           
+           let certificateList = []
+           var certificateDetails 
+           const certificate = await Certificate.findOne({_id: certificateID})
+           console.log("The certificate is: "+ certificate)
+           Certificate.findOne({_id: certificateID}).populate('comments').
+                    exec(function (err, certificateDoc) {
+                        if (err) {console.log(err)}
+                            console.log("Certificate Doc is:" + certificateDoc)
+                            console.log('The author is ' + certificateDoc.comments);
+                            res.render('universities/certificate/certificateDetails',{certificate:certificateDoc,moment:moment,empty:false})
+                       
+                    });
+        //    const certificate = await Certificate.findOne({_id: certificateID},(err,result)=>{
+        //         if(result){
+        //            certificateDetails = result
+        //            //console.log("Result is "+result)
+        //           // console.log("Comemnts saved in result is "+result.comments)
+                  
+        //           this.populate('comments').
+        //             exec(function (err, comments) {
+        //                 if (err) {console.log(err)}
+        //                 console.log('The author is ' + comments);
+        //                 console.log('The result is ' + result);
+                       
+        //             });
+                  //console.log("The comments for this certificate are: "+ result.comments)  
+                  //res.render('universities/certificate/certificateDetails',{certificate:certificateDetails,moment:moment,empty:false})
+                  
+            //     }else{
+            //       console.log('Reached this point')
+            //       //res.render('universities/certificate/certificateDetails',{certificate:result,moment:moment,empty:true})
+        
+            //     }
+            
+            // })
+            //console.log("Certificate Details from outside loop is " + certificateDetails)
+            //res.render('universities/certificate/certificateDetails',{certificate:certificateDetails,moment:moment,empty:false})
+           
+
+           
+
+        //   var certComments = []
+        //   if(2>1){
+        //     //const comments = await Comment.find({_id: {$in:certificateList}},{sort: { 'createdAt': -1 }},(err,result)=>{
+        //     const comments = await Comment.find({},(err,result)=>{
+        //         if(result){
+        //           certComments = result
+        //           console.log("This is the result"+result)
+        //         //res.render('universities/certificate/certificateDetails',{certificate:result,moment:moment,empty:false})
+        //         }else{
+        //         console.log('Reached this point in certificate')
+        
+        //         }
+            
+        //     })
+        //   }
+        //   console.log('The comments are coming:')
+        //   console.log(certComments)
+
+
+            // Certificate.findOne({student_id: studentID}).
+            // populate('comments').
+            //     exec(function (err, comments) {
+            //         if (err) {console.log(err)}
+            //         console.log('The author is %s', comments);
+            //         // prints "The author is Ian Fleming"
+            //     });
+
+
+            //certificate.full_name="Rashid Khan Evan"
+            //certificate.save((err)=>console.log(err))
+            //const {universityName,posterType,textBody,recipient} = {'University of Barishal','Maker',"Are all the info correct!!","Checker"}
+        //     const comment2 = new Comment({
+        //                         universityName:'University of Barishal',
+        //                         posterType: 'Maker',
+        //                         textBody: "I know there is something wrong with student's name which is worth checking?",
+        //                         recipient: "Checker"
+        //                     })
+        //   await comment2.save((err)=>console.log('some error') )
+        //   certificate.comments.push(comment2)
+        //   await certificate.save((err)=>console.log('some error'))
+        //   console.log( 'Comments', certificate.comments[3].textBody)
+        //    certificate.comments = []
+        //    certificate.save((err)=>console.log(err))
+             
+                
+                
+            
+        },
+
+        /* Posts comments from certificate details page */ 
+        async certCommentPost(req, res){
+            if (req.body.commentText.length === 0)
+                console.log('comment is empty')
+            else{
+                const commentText = req.body.commentText
+                const certificateID = req.body.cID 
+                const comment = new Comment({
+                                        universityName:'University of Barishal',
+                                        posterType: 'Maker',
+                                        textBody: commentText,
+                                        recipient: "Checker",
+                                        certificateID: certificateID
+                                    })
+                await comment.save()
+                
+                const certificate = await Certificate.findOne({_id: certificateID})
+                certificate.comments.push(comment)
+                await certificate.save()
+                //creating redirect URL 
+                const url = '/university/certificate-details/' + certificateID
+                res.redirect(url)
+                                
+            } //end of else block
+
+        },
+
+        async certificateFilterProcess(req,res){
+            //by date
+            
+            //this week 
+            //this months
+            //by department 
+            //by student 
+
+            console.log(req.body)
+            let [year,month,day] = req.body.start_date.split('-')
+            year='2021'
+            month='11'
+            day='08'
+            let startDate = new Date(year.concat('-',month).concat('-',day))
+            //let startDate = new Date(year,month,day)
+            //let startDate = '2021-12-26'
+            console.log("This is new")
+
+            const certificate = await Certificate.find({ //query today up to tonight
+                createdAt: {
+                        $gte: '2021/11/08',
+                        $lt:  '2021/12/09'
+                }
+            }).sort({createdAt:-1})
+
+            console.log("The number of certificates  are:"+ certificate.length)
+            
+        },
+
+        async certificateFilterDisplay(req,res){
+            res.render('universities/certificate/certificateFilter')
         }
     }
 }

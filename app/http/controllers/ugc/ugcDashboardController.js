@@ -7,16 +7,48 @@ const Student = require('../../../models/student')
 const moment = require('moment')
 const axios = require('axios')
 const bcrypt = require('bcrypt')
+var nodemailer = require('nodemailer')
+
 //const helper = require('../../../helper')
 
+/** Helper Function for sending Email */
+function emailToStudent (certificate_id){
+    
+    var transporter = nodemailer.createTransport({
+        host: 'smtp.ethereal.email',
+        port: 587,
+        auth: {
+            user: 'jaylan.cummerata13@ethereal.email',
+            pass: 'RcPDY8TjPF19ZHXS1E'
+        }
+      });
+      
+      var mailOptions = {
+        from: email_address_personal,
+        to: 'get.mitun@gmail.com',
+        subject: 'Your UGC UniChain Certificate is Ready!!',
+        text: 'Congrats! Certificate has been added to blockchain with certificate ID:' + certificate_id
+      };
+      
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+}
 
 
 function ugcDashboardController(){
     return{
+        /*** Displays UGC Dashborad **/
         dashboardRender(req, res){
             console.log(req.session.user)
             res.render('ugc/dashboard',{certificate:[], moment:moment, empty:true, user:req.session.user})
         },
+
+        /** Single Certificate Verification for UGC **/
         async verifyCertificate(req,res){
     
             if(!req.body.uniqueID)
@@ -36,9 +68,13 @@ function ugcDashboardController(){
                 
             })
         },
+
+        /** Displays registration form for third party  */
         async showThirdPartyRegistrationForm(req,res){
             res.render('ugc/other/createOther')
         },
+
+        /** Processes Registration fornm for third party  */
         async thirdPartyRegistration(req, res){
             console.log(req.body)
             
@@ -61,7 +97,7 @@ function ugcDashboardController(){
                 req.flash('nameOne', nameOne)
                 req.flash('emailOne', emailOne)
                 req.flash('designationOne', designationOne)
-                return res.redirect('/other/registration')
+                return res.redirect('/ugc/client/create')
             }
 
             /*-------------check if contact exists------------*/ 
@@ -82,7 +118,7 @@ function ugcDashboardController(){
                     req.flash('nameOne', nameOne)
                     req.flash('emailOne', emailOne)
                     req.flash('designationOne', designationOne)
-                    return res.redirect('/other/registration')
+                    return res.redirect('/ugc/client/create')
                 }
             })
 
@@ -104,7 +140,7 @@ function ugcDashboardController(){
                     req.flash('nameOne', nameOne)
                     req.flash('emailOne', emailOne)
                     req.flash('designationOne', designationOne)
-                    return res.redirect('/other/registration')
+                    return res.redirect('/ugc/client/create')
                 }
             })
 
@@ -126,7 +162,7 @@ function ugcDashboardController(){
                     req.flash('nameOne', nameOne)
                     req.flash('emailOne', emailOne)
                     req.flash('designationOne', designationOne)
-                    return res.redirect('/other/registration')
+                    return res.redirect('/ugc/client/create')
                 }
             })
 
@@ -148,7 +184,7 @@ function ugcDashboardController(){
                     req.flash('nameOne', nameOne)
                     req.flash('emailOne', emailOne)
                     req.flash('designationOne', designationOne)
-                    return res.redirect('/other/registration')
+                    return res.redirect('/ugc/client/create')
                 }
             })
             /*-------------check if official email exists------------*/ 
@@ -169,7 +205,7 @@ function ugcDashboardController(){
                     req.flash('nameOne', nameOne)
                     req.flash('emailOne', emailOne)
                     req.flash('designationOne', designationOne)
-                    return res.redirect('/other/registration')
+                    return res.redirect('/ugc/client/create')
                 }
             })
 
@@ -191,7 +227,7 @@ function ugcDashboardController(){
                     req.flash('nameOne', nameOne)
                     req.flash('emailOne', emailOne)
                     req.flash('designationOne', designationOne)
-                    return res.redirect('/other/registration')
+                    return res.redirect('/ugc/client/create')
                 }
             })
 
@@ -213,7 +249,7 @@ function ugcDashboardController(){
                 req.flash('nameOne', nameOne)
                 req.flash('emailOne', emailOne)
                 req.flash('designationOne', designationOne)
-                return res.redirect('/other/registration')
+                return res.redirect('/ugc/client/create')
             }
 
             if(domain === "yahoo.com"){
@@ -232,7 +268,7 @@ function ugcDashboardController(){
                 req.flash('nameOne', nameOne)
                 req.flash('emailOne', emailOne)
                 req.flash('designationOne', designationOne)
-                return res.redirect('/other/registration')
+                return res.redirect('/ugc/client/create')
             }
 
             
@@ -253,7 +289,7 @@ function ugcDashboardController(){
                 req.flash('nameOne', nameOne)
                 req.flash('emailOne', emailOne)
                 req.flash('designationOne', designationOne)
-                return res.redirect('/other/registration')
+                return res.redirect('/ugc/client/create')
             }
 
             /*-----------check password and confirm password matched or not---------*/ 
@@ -273,17 +309,21 @@ function ugcDashboardController(){
                 req.flash('nameOne', nameOne)
                 req.flash('emailOne', emailOne)
                 req.flash('designationOne', designationOne)
-                return res.redirect('/other/registration')
+                return res.redirect('/ugc/client/create')
             }
 
 
             const hash = crypto.createHash('sha256', secret)
                                .update(orgName, typeOfOrg, country,state, city, zipcode, phoneOne, phonetwo, phonethree, officialemail, emailDomain, nameOne, designationOne)
                                .digest('hex');
-            console.log("Hash: " + hash)
+            console.log("ash: " + hash)
             /*------------hashed password----------*/
-            const hashedPassword = await bcrypt.hash(password, 10) 
-            const other = new Other({
+            const hashedPassword = await bcrypt.hash(password, 10)
+            console.log("HashedPassword: " + hash) 
+
+            /*------------Create object and save to DB-------------- */
+            try{
+            var other = new Other({
                     uniqueID: uuid(),
                     orgName,
                     typeOfOrg,
@@ -303,17 +343,22 @@ function ugcDashboardController(){
                     registrationStatus: 'approved',
                     hash: hash
             })
+            }catch(err){
+                console.log(err)
+            }
+            console.log('Point 5452')
             console.log(other)
             await other.save().then(request =>{
+                console.log('Point save success')
                 req.flash('success', 'Registration done successfully')
-               // helper.emailToStudent('6180ef2e59010302006b1b18','get.mitun@gmail.com')
+                emailToStudent('6180ef2e59010302006b1b18')
                 
             }).catch(err => {
                 console.log(err)
                 req.flash('error', 'Something went wrong')
                 return res.redirect('/ugc/client/create')
             })
-
+``
             return res.redirect('/ugc/client/create')
               
         },

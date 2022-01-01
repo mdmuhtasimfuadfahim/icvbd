@@ -2,8 +2,8 @@
 <section class="home-content py-20">
     <section class="ml-20 certificate_container py-20">
             
-           <h1 class="heading"> Certificate Creation </h1>
-           <h3 class="sub-heading"> Fill up the form to create a certificate. </h3>
+           <h1 class="heading"> Filter Certificate</h1>
+           <h3 class="sub-heading"> Please Select one or more of the following criterion  </h3>
             
              
             <form action="/university/certificate/create" method="POST">
@@ -80,7 +80,7 @@
                         <div class="col-half">
                             <h5>Major</h5>
                             <div class="input-group">
-                                <select name="major" id="">
+                                <select name="major text-2xl" id="">
                                     <option value="CSE" <%= messages.major ? 'selected' : '' %>>CSE</option>
                                     <option value="EEE" <%= messages.major ? 'selected' : '' %>>EEE</option>
                                     <option value="BBA" <%= messages.major ? 'selected' : '' %>>BBA</option>

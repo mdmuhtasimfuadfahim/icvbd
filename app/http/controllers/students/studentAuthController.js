@@ -2,16 +2,33 @@ const bcrypt = require('bcrypt')
 const { v4: uuid } = require('uuid')
 const Student = require('../../../models/student')
 const Certificate = require('../../../models/certificate')
+const University = require('../../../models/university')
 const passport = require('passport')
 // const University = require('../../../models/university')
 const crypto = require('crypto')
 const secret = process.env.SECRET_TO_HASH_DB_VALUES
 const moment = require('moment')
 
+
+
+async function fetchUniNames(){
+    
+    await University.find({},'uniName',(err,result)=>{
+        if(err)
+            console.log(err)
+        else{  
+            console.log(result)
+            return(result)
+        }
+    })
+   
+    
+}
+
 function studentAuthController(){
     return{
         index(req, res){
-            res.render('auth/students/registration')
+            res.render('auth/students/registration', {uniNames: fetchUniNames()} )
         },
         login(req, res){
             res.render('auth/students/login')
