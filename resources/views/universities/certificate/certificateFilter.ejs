@@ -1,0 +1,99 @@
+<!-- Certificate Section Start -->
+<section class="home-content py-20">
+  <section class="ml-20 certificate_container py-20">
+          
+         <h1 class="heading"> Certificate Creation </h1>
+         <h3 class="sub-heading"> Fill up the form to create a certificate. </h3>
+          
+           
+          <form action="/university/certificate-filter/process" method="POST">
+              <% if(messages.error) { %>
+                  <span class="text-red-500 text-4xl font-bold"><%= messages.error %></span>
+              <% } else { %>
+                  <span class="text-green-500 text-4xl font-bold"><%= messages.success %></span>
+              <% } %>
+              <div class="row">
+                  <h4 class="mb-10 mt-10">Select or filled up fields you need to filter!!</h4>
+                  
+                  
+                  
+                  <div class="row mt-4">
+                    <h3 class="text-4xl mt-10 mb-5 border-2 border-black underline overline">
+                        Filter By Department
+                    </h3>
+                    <div class="col-half">
+                      <h5>Minor</h5>
+                      <div class="input-group">
+                          <select name="minor" id="">
+                              <option value="CSE" <%= messages.minor ? 'selected' : '' %>>CSE</option>
+                              <option value="EEE" <%= messages.minor ? 'selected' : '' %>>EEE</option>
+                              <option value="BBA" <%= messages.minor ? 'selected' : '' %>>BBA</option>
+                              <option value="MSJ" <%= messages.minor ? 'selected' : '' %>>MSJ</option>
+                              <option value="Law" <%= messages.minor ? 'selected' : '' %>>Law</option>
+                              <option value="English" <%= messages.minor ? 'selected' : '' %>>English</option>
+                          </select>
+                      </div>
+                    </div> 
+                      <div class="col-half">
+                          <h5>Major</h5>
+                          <div class="input-group">
+                              <select name="major text-2xl" id="">
+                                  <option value="EEE" <%= messages.major ? 'selected' : '' %>>EEE</option>
+                                  <option value="CSE" <%= messages.major ? 'selected' : '' %>>CSE</option>  
+                                  <option value="BBA" <%= messages.major ? 'selected' : '' %>>BBA</option>
+                                  <option value="MSJ" <%= messages.major ? 'selected' : '' %>>MSJ</option>
+                                  <option value="Law" <%= messages.major ? 'selected' : '' %>>Law</option>
+                                  <option value="English" <%= messages.major ? 'selected' : '' %>>English</option>
+                              </select>
+                          </div>
+                      </div> 
+                  </div>
+                  
+                  
+                  <div class="row mt-4">
+                      <h3 class="text-4xl mt-10 mb-5 border-2 border-black underline overline">
+                          Filter By Date
+                      </h3>
+                      <div class="col-half">
+                          <h5>Start Date</h5>
+                          <div class="input-group">
+                              <label for="doa"></label>
+                              <input type="date" name="start_date" type="text">
+                          </div>
+                      </div>
+                      <div class="col-half">
+                          <h5>End Date</h5>
+                              <div class="input-group">
+                                  <label for="dog"></label>
+                                  <input type="date" name="end_date" type="text">
+                              </div>
+                      </div>
+                  </div>
+                  <div class="row mt-4">
+                    <h3 class="text-4xl mt-10 mb-5 border-2 border-black underline overline">
+                        Filter By Name and/or ID
+                    </h3>
+                      <div class="col-half">
+                          <h5>Student Name </h5>
+                          <div class="input-group">
+                              <label for="father"></label>
+                              <input  name="student_name" type="text" placeholder ="Type Student Name">
+                          </div>
+                      </div>
+                      <div class="col-half">
+                          <h5>Student University ID</h5>
+                              <div class="input-group">
+                                  <label for="mother"></label>
+                                  <input  name="student_name" type="text" placeholder ="Type Student ID">
+                              </div>
+                      </div>
+                  </div>
+
+              </div>
+              <button type="submit" class="btn">Filter</button>
+              <a class="float-right mt-6 text-2xl" href="/university/certificate/table">Go Back</a>
+          </form>
+      </section>
+  </section>
+  
+  <!-- Certificate Section End -->
