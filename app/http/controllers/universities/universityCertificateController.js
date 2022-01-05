@@ -27,6 +27,34 @@ async  function uniEventLogger(uniName,loggerText,official){
     
 }
 
+/*****Sending email via SendGrid  ***/
+async function sendEmailToStudentViaSendGrid(
+    studentPersonalEmail='sampleStudent101@yopmail.com', //setting default email fields
+    subject = "Message Generated from UGC ICV System",
+    text = "Welcome to UGC ICV"
+    ){
+            
+    sgMail.setApiKey('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')
+    const msg = {
+        to: studentPersonalEmail, // Change to your recipient
+        from: 'official.contact.ugc@gmail.com', // Change to your verified sender
+        subject: subject,
+        text: text,
+        html: '<strong>'+text+'</strong>',
+    }
+    sgMail
+    .send(msg)
+    .then(() => {
+        console.log('Email sent')
+    })
+    .catch((error) => {
+        console.error(error)
+    })
+
+
+
+}
+/*---Not working at the moment--- */
 function emailToStudent(certificate_id,email_address_personal='get.mitun@gamil.com'){
     var transporter = nodemailer.createTransport({
         host: 'smtp.ethereal.email',
@@ -82,7 +110,7 @@ function universityCertificateController(){
         createCertificate(req, res){
             console.log(req.body)
             const { full_name, email_address, email_address_personal, student_id, credit, courses, university_name, major, cgpa, minor, dob, gender, doa, dog,father_name,mother_name } = req.body
-            //console.log(req.body)
+            console.log("The request body is: ", req.body)
            
             /*------------validate request----------*/
             if(!full_name || !email_address || !student_id || !credit || !courses || !university_name || !major || !cgpa || !minor || !dob|| !gender || !doa || !dog ){
@@ -107,8 +135,8 @@ function universityCertificateController(){
             }
 
 
-            /*-------------check if student email exists------------*/ 
-            Certificate.exists({email_address: email_address}, (err, result) =>{
+            /*-------------check if student email exists within varsity record------------*/ 
+            Certificate.exists({email_address: email_address,university_name:university_name}, (err, result) =>{
                 if(result){
                     req.flash('error', 'This Email is Already Exists')
                     req.flash('full_name', full_name)
@@ -129,10 +157,34 @@ function universityCertificateController(){
                     req.flash('mother_name',mother_name)
                     return res.redirect('/university/certificate/form')
                 }
+            })
 
+            /*-------------check if student email exists within varsity record------------*/ 
+            Certificate.exists({email_address_personal: email_address_personal,university_name:university_name}, (err, result) =>{
+                if(result){
+                    req.flash('error', 'This Email is Already Exists')
+                    req.flash('full_name', full_name)
+                    req.flash('email_address', email_address)
+                    req.flash('email_address_personal', email_address_personal)
+                    req.flash('student_id', student_id)
+                    req.flash('credit', credit)
+                    req.flash('courses', courses)
+                    req.flash('university_name', university_name)
+                    req.flash('major', major)
+                    req.flash('cgpa', cgpa)
+                    req.flash('minor', minor)
+                    req.flash('dob', dob)
+                    req.flash('gender', gender)
+                    req.flash('doa', doa)
+                    req.flash('dog', dog)
+                    req.flash('father_name',father_name)
+                    req.flash('mother_name',mother_name)
+                    return res.redirect('/university/certificate/form')
+                }
+            })
 
-                /*-------------check if student ID exists------------*/ 
-                Certificate.exists({student_id: student_id}, (err, result) =>{
+                /*-------------check if student ID exists within varsity record------------*/ 
+                Certificate.exists({student_id: student_id,university_name:university_name}, (err, result) =>{
                     if(result){
                         req.flash('error', 'This Student ID is Already Exists')
                         req.flash('full_name', full_name)
@@ -220,7 +272,7 @@ function universityCertificateController(){
                     let officialType = 'Maker'
                     uniEventLogger(sessionUniName, loggerText, officialType)
                     console.log('point 414')
-                    req.flash('success', 'Certificate Created Successfully')
+                    req.flash('success', 'Certificate Created Successfully. Visit "Approved Certificate" section for details')
                     return res.redirect('/university/certificate/form')
                 }).catch(err => {
                     console.log(err)
@@ -229,7 +281,7 @@ function universityCertificateController(){
                 })
 
                
-            })
+            
         },
         postFind(req, res){
             if(req.query.id){
@@ -293,12 +345,13 @@ function universityCertificateController(){
         },
         
 
-        /***  ***/
+        /*** Maker Views Pending Certificates still not approved by maker ***/
         async makerViewsPending(req,res){
             console.log('message from makerViewsPending')
             university_name = req.session.user.uniName
             const certificates = await Certificate.find({isVerified:'not_verified',university_name:university_name}, null, {sort: { 'createdAt': -1 }})
-            res.render('universities/maker/pending-certificates',{certificates:certificates,moment:moment})
+           // res.render('universities/maker/pending-certificates',{certificates:certificates,moment:moment})
+            res.render('universities/certificate/certificateTable3', {certificate: certificates, moment: moment,user:req.session.user})
         },
 
         /* Checker Dashboard Controller */
@@ -321,7 +374,15 @@ function universityCertificateController(){
                             if(err)
                                 console.log(err)
                             else{
-                                emailToStudent(doc.uniqueID)
+                                /**Sending Email */
+                                let emailDestination = 'aminulrakib@yopmail.com' //for testing purpose only
+                                //let emailDestination = doc.email_address_personal
+                                let emailSubject = "Your university certificate has been created"
+                                let emailText = "Your Certificate has been created with ID: " + doc.uniqueID
+                                console.log(emailDestination,emailSubject,emailText)             
+                                sendEmailToStudentViaSendGrid(emailDestination,emailSubject,emailText)
+
+                                /*Logging Event */
                                 let loggerText   = req.session.user.uniName + " 'Checker' validated certicate with ID:" + doc.uniqueID
                                 let officialType = 'Checker'
                                 uniEventLogger(req.session.user.uniName, loggerText, officialType)
@@ -367,24 +428,9 @@ function universityCertificateController(){
         },
 
         /*** Experimental */
-        async sendEmailToStudentSendGrid(req,res){
+        async sendEmailToStudentSendGrid(studentPersonalEmail='sampleStudent101@yopmail.com'){
             
-            sgMail.setApiKey('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')
-            const msg = {
-            to: 'get.mitun@gmail.com', // Change to your recipient
-            from: 'official.contact.ugc@gmail.com', // Change to your verified sender
-            subject: 'Sending with SendGrid is Fun',
-            text: 'and easy to do anywhere, even with Node.js',
-            html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-            }
-            sgMail
-            .send(msg)
-            .then(() => {
-                console.log('Email sent')
-            })
-            .catch((error) => {
-                console.error(error)
-            })
+            sendEmailToStudentViaSendGrid("getmitun@yopmail.com")
 
 
 
@@ -515,31 +561,66 @@ function universityCertificateController(){
         },
 
         async certificateFilterProcess(req,res){
-            //by date
             
-            //this week 
-            //this months
-            //by department 
-            //by student 
+            //has to include university name 
+            let form = req.body
+            let filter = {}
+            
+            /**start of filter object */
+            
+            if(form.major?.trim().length>0) {filter.major = form.major.trim()}
+            if(form.minor?.trim().length>0) {filter.minor = form.minor.trim()}  
+            if(form.full_name?.trim().length>0) {filter.full_name = form.student_name}
+            if(form.student_id?.trim().length>0) {filter.student_id = form.student_id}
+            
+            /**First set Defaults
+             *  starting date to startingDate - 5
+             *  ending date to endingDate - 5
+             * */
+            let currentYear = new Date().getFullYear();
+            let fiveYearsBack = currentYear - 5
+            let fiveYearsForward = currentYear + 5
+            let startDate = fiveYearsBack.toString() + '-'+ '01' + '-' + '01'
+            let endDate = fiveYearsForward.toString() + '-'+ '01' + '-' + '01'
 
-            console.log(req.body)
-            let [year,month,day] = req.body.start_date.split('-')
-            year='2021'
-            month='11'
-            day='08'
-            let startDate = new Date(year.concat('-',month).concat('-',day))
+            /** If date value comes from Form
+             *  setting dates to new values 
+             * */
+
+            if(form.start_date.length>0){ //if form has date set
+                console.log(form.start_date +' & '+ form.end_date)
+                startDate = form.start_date
+                if (form.end_date.length>0){
+                    endDate = form.end_date  
+                }
+                else{ ///end date is not set. So setting end date after adding one day to start date and se
+                    let [year,month,day] = req.body.start_date.split('-')
+                    let tomorrow = parseInt(day)+1  
+                    let newDate = year+'-'+month+'-'+ tomorrow.toString()
+                    endDate = newDate
+                }
+            }
+            
             //let startDate = new Date(year,month,day)
             //let startDate = '2021-12-26'
-            console.log("This is new")
+            console.log("This is filter object: ", filter)
+            console.log("The start date is: ", startDate)
+            console.log("The end date is: ", endDate)
 
-            const certificate = await Certificate.find({ //query today up to tonight
-                createdAt: {
-                        $gte: '2021/11/08',
-                        $lt:  '2021/12/09'
-                }
-            }).sort({createdAt:-1})
+            // const certificate = await Certificate.find({ //query today up to tonight
+            //     createdAt: {
+            //             $gte: startDate,
+            //             $lt:  endDate
+            //     }
+            // }).sort({createdAt:-1})
 
-            console.log("The number of certificates  are:"+ certificate.length)
+            // console.log("The number of certificates  are:"+ certificate.length)
+
+            Certificate.
+            find(filter).
+            where('createdAt').gte(startDate).lt(endDate).
+            sort({'createdAt':-1}).
+            exec((err,result)=>console.log("The number of certificates  are:"+ result.length))
             
         },
 

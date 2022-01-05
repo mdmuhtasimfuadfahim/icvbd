@@ -25,6 +25,7 @@
                       <h5>Minor</h5>
                       <div class="input-group">
                           <select name="minor" id="">
+                            <option disabled selected >Select an option</option>
                               <option value="CSE" <%= messages.minor ? 'selected' : '' %>>CSE</option>
                               <option value="EEE" <%= messages.minor ? 'selected' : '' %>>EEE</option>
                               <option value="BBA" <%= messages.minor ? 'selected' : '' %>>BBA</option>
@@ -37,7 +38,8 @@
                       <div class="col-half">
                           <h5>Major</h5>
                           <div class="input-group">
-                              <select name="major text-2xl" id="">
+                              <select name="major"class="text-2xl" id="">
+                                  <option disabled selected value="">Select an option</option>
                                   <option value="EEE" <%= messages.major ? 'selected' : '' %>>EEE</option>
                                   <option value="CSE" <%= messages.major ? 'selected' : '' %>>CSE</option>  
                                   <option value="BBA" <%= messages.major ? 'selected' : '' %>>BBA</option>
@@ -76,15 +78,15 @@
                       <div class="col-half">
                           <h5>Student Name </h5>
                           <div class="input-group">
-                              <label for="father"></label>
+                              <label for="student_name"></label>
                               <input  name="student_name" type="text" placeholder ="Type Student Name">
                           </div>
                       </div>
                       <div class="col-half">
                           <h5>Student University ID</h5>
                               <div class="input-group">
-                                  <label for="mother"></label>
-                                  <input  name="student_name" type="text" placeholder ="Type Student ID">
+                                  <label for="student_id"></label>
+                                  <input  name="student_id" type="text" placeholder ="Type Student ID">
                               </div>
                       </div>
                   </div>

@@ -4,17 +4,40 @@ const Log = require('../../../models/logging')
 const moment = require('moment')
 const flash = require('connect-flash')
 
+function checkMakerLogin(req,res){
+    if(!req.session.uniUserType){
+        res.redirect('/university/login')
+    }
+    if(!(req.session.uniUserType==='maker' || req.session.uniUserType==='Maker')){
+        req.flash('error','To access this page Please login again with proper credentials')
+        res.redirect('/university/login')
+    }
+}
+
+function checkCheckerLogin(req,res){
+    if(!req.session.uniUserType){
+        res.redirect('/university/login')
+    }
+    if(!(req.session.uniUserType==='checker' || req.session.uniUserType==='Checker')){
+        req.flash('error','To access this page Please login again with proper credentials')
+        res.redirect('/university/login')
+    }
+}
+
 function universityRequestController(){
     return{
         async showCompleted(req, res){
+            checkMakerLogin(req,res) //checks whether user is logged in or not 
             const accounts = await Student.find({ uniName : req.session.user.uniName }, null, { registrationStatus: 'approved' })
             res.render('universities/students/approved', {accounts: accounts, moment: moment})
         },
         /* List of students whose accounts were not approved */ 
         async accountRequests(req, res){
+            checkMakerLogin(req,res)
             const account = await Student.find({ registrationStatus: 'not_approved',uniName : req.session.user.uniName}, null, {sort: { 'createdAt': -1 }})
             res.render('universities/students/approval', {account: account, moment: moment,user:req.session.user})
         },
+        /* Handle POST for approving account which were not approved */ 
         accountApproval(req, res){
             Student.updateOne({ _id: req.body.accountId }, { registrationStatus: req.body.registrationStatus }, (err,data) =>{
                 if(err){

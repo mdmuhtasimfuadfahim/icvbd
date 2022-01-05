@@ -24,7 +24,7 @@ async function fetchUniNames(){
    
     
 }
-
+/*---------------Controller---------- */
 function studentAuthController(){
     return{
         index(req, res){
@@ -33,11 +33,12 @@ function studentAuthController(){
         login(req, res){
             res.render('auth/students/login')
         },
+        /*----------------Handles POST from student registration form------------ */
         async registration(req, res){
-            const {firstName, lastName, fatherName, mohterName, dob, uniName, studentEmail, studentID, phone, address, password, confirmPass } = req.body
+            const {firstName, lastName, fatherName, mohterName, dob, uniName, studentEmail,personalEmail, studentID, phone, address, password, confirmPass } = req.body
             
             /*---------------validate request------------*/ 
-            if(!firstName || !fatherName || !mohterName || !dob || !uniName || !studentEmail || !studentID || !phone || !address || !password || !confirmPass){
+            if(!firstName  || !dob || !uniName || !studentEmail || !personalEmail||!studentID || !phone || !address || !password || !confirmPass){
                 req.flash('error', 'All Fields are Required for Registration')
                 req.flash('firstName', firstName)
                 req.flash('fatherName', fatherName)
@@ -46,16 +47,17 @@ function studentAuthController(){
                 req.flash('dob', dob)
                 req.flash('uniName', uniName)
                 req.flash('studentEmail', studentEmail)
+                req.flash('personalEmail', personalEmail)
                 req.flash('studentID', studentID)
                 req.flash('phone', phone)
                 req.flash('address', address)
                 return res.redirect('/student/registration')
             }
 
-            /*-------------check if student email exists------------*/ 
-            Student.exists({studentEmail: studentEmail}, (err, result) =>{
+            /*-------------check if student academic email exists within university------------*/ 
+            Student.exists({studentEmail: studentEmail,uniName:uniName}, (err, result) =>{
                 if(result){
-                    req.flash('error', 'This email is already taken')
+                    req.flash('error', 'This academic email is already registered')
                     req.flash('firstName', firstName)
                     req.flash('fatherName', fatherName)
                     req.flash('mohterName', mohterName)
@@ -63,6 +65,7 @@ function studentAuthController(){
                     req.flash('dob', dob)
                     req.flash('uniName', uniName)
                     req.flash('studentEmail', studentEmail)
+                    req.flash('personalEmail', personalEmail)
                     req.flash('studentID', studentID)
                     req.flash('phone', phone)
                     req.flash('address', address)
@@ -70,8 +73,28 @@ function studentAuthController(){
                 }
             })
 
-            /*-------------check if contact exists------------*/ 
-            Student.exists({studentID: studentID}, (err, result) =>{
+            /*-------------check if student academic email exists------------*/ 
+            Student.exists({personalEmail: perEmail,uniName:uniName}, (err, result) =>{
+                if(result){
+                    req.flash('error', 'This academic email is already registered')
+                    req.flash('firstName', firstName)
+                    req.flash('fatherName', fatherName)
+                    req.flash('mohterName', mohterName)
+                    req.flash('lastName', lastName)
+                    req.flash('dob', dob)
+                    req.flash('uniName', uniName)
+                    req.flash('studentEmail', studentEmail)
+                    req.flash('personalEmail', personalEmail)
+                    req.flash('studentID', studentID)
+                    req.flash('phone', phone)
+                    req.flash('address', address)
+                    return res.redirect('/student/registration')
+                }
+            })
+
+
+            /*-------------check if Student ID exists------------*/ 
+            Student.exists({studentID: studentID,uniName:uniName}, (err, result) =>{
                 if(result){
                     req.flash('error', 'Studen ID already exists')
                     req.flash('firstName', firstName)
@@ -81,6 +104,7 @@ function studentAuthController(){
                     req.flash('dob', dob)
                     req.flash('uniName', uniName)
                     req.flash('studentEmail', studentEmail)
+                    req.flash('personalEmail', personalEmail)
                     req.flash('studentID', studentID)
                     req.flash('phone', phone)
                     req.flash('address', address)
@@ -88,7 +112,7 @@ function studentAuthController(){
                 }
             })
 
-            /*-------------check if contact exists------------*/ 
+            /*-------------check if Phone number already exists------------*/ 
             Student.exists({phone: phone}, (err, result) =>{
                 if(result){
                     req.flash('error', 'Contact number is already exists')
@@ -99,6 +123,7 @@ function studentAuthController(){
                     req.flash('dob', dob)
                     req.flash('uniName', uniName)
                     req.flash('studentEmail', studentEmail)
+                    req.flash('personalEmail', personalEmail)
                     req.flash('studentID', studentID)
                     req.flash('phone', phone)
                     req.flash('address', address)
@@ -106,7 +131,7 @@ function studentAuthController(){
                 }
             })
 
-            /*-----------check student email domain---------*/ 
+            /*-----------check if student email domain is gmail.com---------*/ 
             const domain = studentEmail.substring(studentEmail.lastIndexOf("@") + 1)
             if(domain === "gmail.com"){
                 req.flash('error', 'You cannot do registration using gmail')
@@ -123,6 +148,7 @@ function studentAuthController(){
                 return res.redirect('/student/registration')
             }
 
+            /*-----------check if student email domain is yahoo.com---------*/ 
             if(domain === "yahoo.com"){
                 req.flash('error', 'You cannot do registration using yahoo')
                 req.flash('firstName', firstName)
@@ -132,6 +158,7 @@ function studentAuthController(){
                 req.flash('dob', dob)
                 req.flash('uniName', uniName)
                 req.flash('studentEmail', studentEmail)
+                req.flash('personalEmail', personalEmail)
                 req.flash('studentID', studentID)
                 req.flash('phone', phone)
                 req.flash('address', address)
@@ -149,13 +176,14 @@ function studentAuthController(){
                 req.flash('dob', dob)
                 req.flash('uniName', uniName)
                 req.flash('studentEmail', studentEmail)
+                req.flash('personalEmail', personalEmail)
                 req.flash('studentID', studentID)
                 req.flash('phone', phone)
                 req.flash('address', address)
                 return res.redirect('/student/registration')
             }
             const hash = crypto.createHash('sha256', secret)
-                               .update(firstName, fatherName, mohterName, lastName, dob, uniName, studentEmail, studentID, phone, address)
+                               .update(firstName, fatherName, mohterName, lastName, dob, uniName, studentEmail,personalEmail,studentID, phone, address)
                                .digest('hex');
             console.log("Hash: " + hash)
 
@@ -170,6 +198,7 @@ function studentAuthController(){
                     dob,
                     uniName,
                     studentEmail,
+                    personalEmail,
                     studentID,
                     phone,
                     address,
@@ -178,7 +207,7 @@ function studentAuthController(){
             })
             console.log(student)
             student.save().then(request =>{
-                req.flash('success', 'Registration done successfully')
+                req.flash('success', 'Registration done successfully. You will be able to login after your account request is accepted. Contact your university authority for further information')
                 return res.redirect('/student/registration')
             }).catch(err => {
                 console.log(err)
@@ -187,6 +216,8 @@ function studentAuthController(){
             })
 
         },
+
+        /*---------Handles POST for login form ----------- */
         async postLogin(req, res, next){
             const { studentEmail, password } = req.body
 
@@ -247,6 +278,8 @@ function studentAuthController(){
                     console.log(err)
             });
         },
+
+        /*-----Handles Student view for his/her certificate------ */
         async studentCertificate(req,res){
             
             if(!req.session.user.studentID){
@@ -254,9 +287,9 @@ function studentAuthController(){
                 res.redirect('/student/login')
             }
             console.log(req.session.user.studentID)
-            const certificate = await Certificate.findOne({student_id: req.session.user.studentID},(err,result)=>{
+            const certificate = await Certificate.findOne({student_id: req.session.user.studentID,university_name:req.session.user.uniName},(err,result)=>{
                 if(result){
-                   //console.log(result)
+                   console.log(result)
                    res.render('students/mycertificate',{certificate:result,moment:moment,empty:false})
                 }else{
                    console.log('Reached this point')
@@ -266,6 +299,47 @@ function studentAuthController(){
             })
             
             
+        },
+
+        /*** View QR Code ***/
+        async viewStudentCertificateQR(req,res){
+           
+            const certificate = await Certificate.findOne({student_id: req.session.user.studentID,university_name:req.session.user.uniName},(err,result)=>{
+                if(err)
+                   console.log(err)
+                if(result){
+                   console.log(result)
+                   let publicQRLink = req.headers.host + "/student/public/certificate/" + result.uniqueID
+                   res.render('students/qr',{certificate:result,moment:moment,empty:false,publicURL:publicQRLink})
+                }else{
+                   console.log('came here')
+                   res.render('students/qr', {certificate:[],moment:moment,empty:true})
+                }
+                
+            })
+
+        },
+
+        /*** Public View after scanning QR Code
+         * Students can view certificate result after scanning QR code without login
+         * UGC and any one can view this link after scanning QR code
+         * ***/
+        async viewPublicStudentCertificateQR(req,res){
+            uniqueID = req.params.id
+            const certificate = await Certificate.findOne({uniqueID: uniqueID},(err,result)=>{
+                if(err)
+                   console.log(err)
+                if(result){
+                   console.log(result)
+                   let publicQRLink = req.headers.host + "/student/public/certificate/" + result.uniqueID
+                   res.render('students/postQrScan',{certificate:result,moment:moment,empty:false,publicURL:publicQRLink})
+                }else{
+                   console.log('came here')
+                   res.render('students/postQrScan', {certificate:[],moment:moment,empty:true})
+                }
+                
+            })
+
         }
     }
 }

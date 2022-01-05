@@ -2,12 +2,7 @@
     <section class="registration py-20" >
 
         <h1 class="heading"> Student Registration Form </h1>
-        <h3 class="sub-heading">Please properly fill and submit form to complete registration </h3>
-        <% if (uniNames) { %>
-            <h1 class="heading"> <%= uniNames.length %></h1>
-        <% }else{ %>
-        <h1 class="heading"> <%= uniNames.length %></h1>
-        <% } %>
+        <h3 class="sub-heading">Please properly fill and submit form to complete registration.Optional fields are marked as such </h3>
         
         
         <form action="/student/registration" method="POST">
@@ -28,11 +23,11 @@
             </div>
             <div class="inputBox">
                 <div class="input">
-                    <label for="fatherName">Father's Name</label>
+                    <label for="fatherName">Father's Name(optional)</label>
                     <input name="fatherName" id="fatherName" value="<%= messages.fatherName %>" type="text" placeholder="enter your father's name">
                 </div>
                 <div class="input">
-                    <label for="mohterName">Mother's Name</label>
+                    <label for="mohterName">Mother's Name(optional)</label>
                     <input id="mohterName" name="mohterName" value="<%= messages.mohterName %>" type="text" placeholder="enter your mother's name">
                  </div>
             </div>
@@ -43,18 +38,25 @@
                 </div>
                 <div class="input">
                     <label for="uniName">University Name</label>
+                    
                     <select name="uniName" id="" class="select-box">
-                        
+                        <% uniNames.forEach(function(value) { %>
+                            <option value="<%= value.uniName %>"> <%= value.uniName %></option>
+                         <% }); %>
                 
                     </select> 
                 </div>
             </div>
             <div class="inputBox">
                 <div class="input">
-                    <label for="studentEmail">Your Email</label>
+                    <label for="studentEmail">Your Academic Email</label>
                     <input name="studentEmail" id="studentEmail" value="<%= messages.studentEmail %>" type="text" placeholder="enter your university email">
                 </div>
                 <div class="input">
+                    <label for="studentID">Your Personal Email</label>
+                    <input id="studentID" name="personalEmail" value="<%= messages.personalEmail %>" type="text" placeholder="enter your personal email">
+                 </div>
+                 <div class="input">
                     <label for="studentID">Your Student ID</label>
                     <input id="studentID" name="studentID" value="<%= messages.studentID %>" type="text" placeholder="enter your student ID">
                  </div>

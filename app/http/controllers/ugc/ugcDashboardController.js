@@ -325,20 +325,20 @@ function ugcDashboardController(){
             try{
             var other = new Other({
                     uniqueID: uuid(),
-                    orgName,
-                    typeOfOrg,
-                    country,
-                    state,
-                    city,
-                    zipcode,
-                    phoneOne,
-                    phonetwo,
-                    phonethree,
-                    officialemail,
-                    emailDomain,
-                    nameOne,
-                    emailOne,
-                    designationOne,
+                    orgName:orgName,
+                    typeOfOrg:typeOfOrg,
+                    country:country,
+                    state:state,
+                    city:city,
+                    zipcode:zipcode,
+                    phoneOne:phoneOne,
+                    phonetwo:phonetwo,
+                    phonethree:phonethree,
+                    officialemail:officialemail,
+                    emailDomain:emailDomain,
+                    nameOne:nameOne,
+                    emailOne:emailOne,
+                    designationOne:designationOne,
                     password: hashedPassword,
                     registrationStatus: 'approved',
                     hash: hash
@@ -354,6 +354,7 @@ function ugcDashboardController(){
                 emailToStudent('6180ef2e59010302006b1b18')
                 
             }).catch(err => {
+                console.log("Error Message initiating")
                 console.log(err)
                 req.flash('error', 'Something went wrong')
                 return res.redirect('/ugc/client/create')
@@ -362,6 +363,19 @@ function ugcDashboardController(){
             return res.redirect('/ugc/client/create')
               
         },
+        /****Experimental function */
+        async fetchOther(req,res){
+            await Other.find({},(err,result)=>{
+                if(err){console.log(err)}
+                if(result){
+                    console.log("Number of results are ",result.length)
+                    result.forEach(element => {
+                        console.log(element);
+                      });
+                }
+                
+            })
+        }
     }
 }
 

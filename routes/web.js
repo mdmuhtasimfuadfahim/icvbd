@@ -97,6 +97,9 @@ function initRoutes(app){
     app.get('/student/dashboard', studentDashboardController().dashboardRender)
     app.get('/student/account', studentDashboardController().showMyAccount)
     app.get('/student/certificate', studentAuthController().studentCertificate)
+    app.get('/student/public/certificate', studentAuthController().viewStudentCertificateQR)
+    app.get('/student/public/certificate/:id',studentAuthController().viewStudentCertificateQR)
+    
 
     /*----------Other Routes-------------*/ 
     app.get('/other/dashboard', otherDashboardController().dashboardRender)
@@ -127,6 +130,7 @@ function initRoutes(app){
     app.post('/ugc/client/create-form-process',  ugcDashboardController().thirdPartyRegistration)
     
     /***experimental routes. NOT TO BE USED IN PRODUCTION***/
+
     app.get('/exp/session',  universityAuthController().sessionTest)
     app.get('/exp/session-destroy',  universityAuthController().sessionDestroy)
     app.get('/exp/fetch',  universityAuthController().fetchData)
@@ -143,6 +147,7 @@ function initRoutes(app){
     app.get('/exp/cert-bulk-update', ugcRequestController().certificateBulkUpdateCron)
     app.get('/exp/fetch-log', universityAuthController().fetchLog)
     app.get('/exp/qr-code', universityAuthController().fetchQR)
+    app.get('/exp/fetch-other-new',  ugcDashboardController().fetchOther)
 }
 
 module.exports = initRoutes
