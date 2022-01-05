@@ -579,13 +579,15 @@ function universityCertificateController(){
             }
             else{
                 //posterType should come from session
+                var author
+                var receiver
                 if(req.session.uniUserType === 'checker' || req.session.uniUserType === 'checker' ){
-                    let author = 'Checker'
-                    let receiver = 'Maker'
+                    author = 'Checker'
+                    receiver = 'Maker'
                 }
                 else {
-                    let author= 'Maker'
-                    let receiver = 'Checker'
+                    author= 'Maker'
+                    receiver = 'Checker'
                 }
 
 

@@ -43,6 +43,9 @@
             <div class="cell">
               Created At 
             </div>
+            <div class="cell">
+              Click for Details 
+            </div>
             
           </div>
          <% if(certificates.length>0){ %>
@@ -91,6 +94,9 @@
            </div>
            <div class="cell" data-title="Registration Date">
             <%= moment(certificate.created_at).format('MMMM Do YYYY, h:mm:ss a') %>
+            </div>
+            <div class="cell" data-title="Registration Date">
+               <a href="/university/certificate-details/<%= certificate._id%>" style="text-decoration: underline;">Check</a> 
             </div>
             </div>
             <% })}else{ %>

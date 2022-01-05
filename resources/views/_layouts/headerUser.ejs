@@ -2,7 +2,7 @@
   <div class="sidebar">
     <div class="logo-details">
       <i class="fas fa-link"></i>
-      <span class="logo_name">UniChain</span>
+      <span class="logo_name">BitecICV</span>
     </div>
       <ul class="nav-links">
         <% if(user) { %>
@@ -108,6 +108,7 @@
               <span class="links_name">Dashboard</span>
             </a>
           </li>
+        
         <% } else { %>
           <li>
             <a href="/student/dashboard" class="#">
@@ -126,9 +127,16 @@
           </li>
         <% } else if(user.role === "UGC") { %>
           <li>
-            <a href="/ugc/accounts/completed">
-              <i class='bx bx-box' ></i>
-              <span class="links_name">Users</span>
+            <a href="/university/certificate/approved-list" class="">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Certificates Approved</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/university/certificate/maker/view-pending" class="">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Certificates Pending</span>
             </a>
           </li>
         <% } else if(user.role === "Other") { %>

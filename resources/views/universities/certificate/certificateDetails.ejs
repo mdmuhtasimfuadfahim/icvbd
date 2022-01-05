@@ -10,6 +10,11 @@
                 <div class="row">
                     
                     <ul class="list-disc text-2xl">
+                        <li class="mb-5">Certificate Status:
+                            <span class="font-bold text-3xl"> 
+                                &nbsp;&nbsp;<%= certificate.isVerified==='not_verified'?"Not Approved" : "Approved"%>
+                            </span>
+                        </li>
                         <li class="mb-5">Created At:<span class="font-bold"> <%= moment(certificate.createdAt).format('MMMM Do, YYYY h:mm:ss A') %></span></li>
                         <li class="mb-5">Last Update:<span class="font-bold"> <%= moment(certificate.updatedAt).format('MMMM Do, YYYY h:mm:ss A') %></span></li>
                         <li class="mb-5">University Name: <span class="font-bold"><%= certificate.university_name%></span></li>
@@ -30,9 +35,9 @@
                     <div>
                         <h1 class="text-center text-4xl mb-10">Comments:</h1>
                         <% certificate.comments.forEach(comment => { %>  
-                            <div name="commentBox mb-10">
+                            <div name="commentBox" style= "margin-bottom: 15px;">
                                 <h3 class="text-3xl italic mb-3" style="text-decoration:underline;">
-                                    <%= comment.posterType %>
+                                    <%= comment.posterType %> &nbsp;(<%= moment(comment.createdAt).fromNow() %>)
                                 </h3>
                                 <p class="text-3xl"><%= comment.textBody %> </p>
                             </div>    
