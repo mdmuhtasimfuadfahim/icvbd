@@ -98,7 +98,7 @@ function initRoutes(app){
     app.get('/student/account', studentDashboardController().showMyAccount)
     app.get('/student/certificate', studentAuthController().studentCertificate)
     app.get('/student/public/certificate', studentAuthController().viewStudentCertificateQR)
-    app.get('/student/public/certificate/:id',studentAuthController().viewStudentCertificateQR)
+    app.get('/student/public/certificate/:id',studentAuthController().viewPublicStudentCertificateQR)
     
 
     /*----------Other Routes-------------*/ 
