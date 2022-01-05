@@ -52,23 +52,40 @@ function universityDashboardController(){
             }
             res.render('universities/others/dashboard',{user:req.session.user})
         },
+
+        /* Verifies Certificate in university home page */
         async verifyCertificate(req,res){
+            // Universities can search for certificates from within their students only. Certificates of others 
+            // varsities won't be accessible to them
+
             if(!req.body.uniqueID)
                 res.render('universities/others/dashboard',{certificate:[], moment:moment, empty:true, user:req.session.user})
-            const certificate = await Certificate.findOne({uniqueID : req.body.uniqueID },(err,result)=>{
+            const certificate = await Certificate.findOne({uniqueID : req.body.uniqueID,university_name: req.session.user.uniName },(err,result)=>{
                 if(err){
                     console.log(error)
                 }
                 if(result){  
-                //    console.log('route1')      
-                   res.render('universities/others/dashboard',{certificate:result, moment:moment, empty:false, user:req.session.user})
+                
+                   console.log("The result is ", result)  
+                   let redirectURL = '/university/certificate-details/'+ result._id
+                   res.redirect(redirectURL)   
+                   //res.render('universities/others/dashboard',{certificate:result, moment:moment, empty:false, user:req.session.user})
                 }else{
                 //    console.log('route2')    
-                   req.flash('error','No certificate with this id found')
+                   req.flash('error','certificate with this id cannot be found')
                    res.render('universities/others/dashboard', {certificate:null,moment:moment,empty:true, user:req.session.user})
                 }
                 
             })
+
+            /* if request is empty redirect to dashboard */
+            // if(!req.body.uniqueID){
+            //     res.render('universities/others/dashboard',{certificate:[], moment:moment, empty:true, user:req.session.user})
+            // }
+            // else{
+            //     let redirectURL = '/university/certificate-details/'+ req.body.uniqueID
+            //     res.redirect(redirectURL)
+            // }
         },
     }
 }
