@@ -7,9 +7,46 @@ const moment = require('moment')
 const axios = require('axios')
 var helper = require('../../../helper')
 
+function checkMakerLogin(req,res){
+    if(!req.session.uniUserType){
+        res.redirect('/university/login')
+    }
+    if(!(req.session.uniUserType==='maker' || req.session.uniUserType==='Maker')){
+        req.flash('error','To access this page Please login again with proper credentials')
+        res.redirect('/university/login')
+    }
+}
+
+function checkCheckerLogin(req,res){
+    if(!req.session.uniUserType){
+        res.redirect('/university/login')
+    }
+    if(!(req.session.uniUserType==='checker' || req.session.uniUserType==='Checker')){
+        req.flash('error','To access this page Please login again with proper credentials')
+        res.redirect('/university/login')
+    }
+}
+
+function checkMakerOrCheckerLogin(req,res){
+    if(!req.session.uniUserType){
+        res.redirect('/university/login')
+    }
+    if(!(req.session.uniUserType==='checker' || req.session.uniUserType==='Checker' 
+                                     ||
+       req.session.uniUserType==='maker' || req.session.uniUserType==='Maker'))
+    {
+        req.flash('error','To access this page Please login again with proper credentials')
+        res.redirect('/university/login')
+    }
+}
+
+
+
+
 function universityDashboardController(){
     return{
         dashboardRender(req, res){
+            checkMakerLogin(req,res)
             if (!req.session.user){
                 req.flash('error','You are probably not logged. Please log in to continue')
             }

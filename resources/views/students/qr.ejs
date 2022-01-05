@@ -3,6 +3,7 @@
 <section class="home-content mr-100">
     
     <h1 class="heading"> Cerificate QR  </h1>
+    <h3 class="sub-heading"> (Copy & Save QR By Right Click) </h3>
     <canvas id="qr" ></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <script>
@@ -26,145 +27,145 @@
 
 <!-- Certificate Section Start -->
 <section class="home-content py-20">
-  <section class="ml-20 certificate_container py-20">
+    <section class="ml-20 certificate_container py-20">
+  
+            <h1 class="heading mb-10"> Welcome to UGC Instant Certificate Verification </h1>
+        
+            <form id="read_form">
+                <div class="row">
+                    <h4 class="mb-10">This Certificate Was Added to Blockchain on <%= moment(certificate.updatedAt).format('MMMM Do, YYYY h:mm A')  %></h4>
+                    <div class="input-group input-group-icon">
+                        <h4 class="mt-2 ml-20"><%= certificate.full_name %></h4>
+                        <span class="input-icon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-icon">
+                        <h4 class="mt-2 ml-20"><%= certificate.email_address %></h4>
+                        <span class="input-icon">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-icon">
+                        <h4 class="mt-2 ml-20"><%= certificate.student_id %></h4>
+                        <span class="input-icon">
+                            <i class="far fa-id-badge"></i>
+                        </span>
+                    </div>
+  
+                    <div class="row mt-10">
+                        <div class="col-half">
+                            <h4>Required Credit:</h4>
+                            <div class="input-group">
+                                    <h5><%= certificate.credit %></h5>
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <h4>Required Courses:</h4>
+                            <div class="input-group">
+                                <h5><%= certificate.courses %></h5>
+                            </div>
+                        </div>
+                    </div>
+  
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h4>University Name:</h4>
+                            <div class="input-group">
+                                <div class="university_name">
+                                    <h5><%= certificate.university_name %></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <h4>Major:</h4>
+                            <div class="input-group">
+                                <div name="major">
+                                    <h5><%= certificate.major %></h5>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+  
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h4>CGPA:</h4>
+                                <div class="input-group">
+                                    <div class="">
+                                        <h5><%= certificate.cgpa %></h5>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <h4>Minor:</h4>
+                            <div class="h5-group">
+                                <div name="minor">
+                                    <h5><%= certificate.minor %></h5>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h4>Gender:</h4>
+                            <div class="input-group">
+                                <h5><%= certificate.gender %></h5>
+                            </div>
+                        </div>
+                        <div class="col-half font-bold">
+                            <h4>Date of Birth:</h4>
+                            <div class="input-group">
+                                <div class="col-third">
+                                    <h5 class=""><%= moment(certificate.dob).format('MMMM Do, YYYY')  %></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+  
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h4>Date of Admission:</h4>
+                            <div class="h5-group">
+                                <div class="col-third">
+                                    <h5><%= moment(certificate.doa).format('MMMM Do, YYYY')  %></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <h4>Date of Graduation:</h4>
+                            <div class="input-group">
+                                <div class="col-third">
+                                    <h5><%= moment(certificate.dog).format('MMMM Do, YYYY') %></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+  
+                    <div class="row mt-4">
+                        <div class="col-half">
+                            <h4>Issued Date:</h4>
+                            <div class="h5-group">
+                                <div class="col-third">
+                                    <h5><%= moment(certificate.createdAt).format('MMMM Do, YYYY') %></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-half">
+                            <h4>Updated Date:</h4>
+                            <div class="input-group">
+                                <div class="col-third">
+                                    <h5><%= moment(certificate.updatedAt).format('MMMM Do, YYYY') %></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </form>
+        </section>
+  </section>
 
-         
-          <h1 class="heading"> Certificate Details </h1>
-      
-          <form id="read_form">
-              <div class="row">
-                  <h4 class="mb-10">Certificate Read</h4>
-                  <div class="input-group input-group-icon">
-                      <h5 class="mt-2 ml-20"><%= certificate.full_name %></h5>
-                      <span class="input-icon">
-                          <i class="fa fa-user"></i>
-                      </span>
-                  </div>
-                  <div class="input-group input-group-icon">
-                      <h5 class="mt-2 ml-20"><%= certificate.email_address %></h5>
-                      <span class="input-icon">
-                          <i class="fa fa-envelope"></i>
-                      </span>
-                  </div>
-                  <div class="input-group input-group-icon">
-                      <h5 class="mt-2 ml-20"><%= certificate.student_id %></h5>
-                      <span class="input-icon">
-                          <i class="far fa-id-badge"></i>
-                      </span>
-                  </div>
-
-                  <div class="row mt-4">
-                      <div class="col-half">
-                          <h5>Required Credit</h5>
-                          <div class="input-group">
-                                  <h5><%= certificate.credit %></h5>
-                          </div>
-                      </div>
-                      <div class="col-half">
-                          <h5>Required Courses</h5>
-                          <div class="input-group">
-                              <h5><%= certificate.courses %></h5>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="row mt-4">
-                      <div class="col-half">
-                          <h5>University Name</h5>
-                          <div class="input-group">
-                              <div class="university_name">
-                                  <h5><%= certificate.university_name %></h5>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-half">
-                          <h5>Major</h5>
-                          <div class="input-group">
-                              <div name="major">
-                                  <h5><%= certificate.major %></h5>
-                              </div>
-                          </div>
-                      </div> 
-                  </div>
-
-                  <div class="row mt-4">
-                      <div class="col-half">
-                          <h5>CGPA</h5>
-                              <div class="input-group">
-                                  <div class="">
-                                      <h5><%= certificate.cgpa %></h5>
-                                  </div>
-                          </div>
-                      </div>
-                      <div class="col-half">
-                          <h5>Minor</h5>
-                          <div class="h5-group">
-                              <div name="minor">
-                                  <h5><%= certificate.minor %></h5>
-                              </div>
-                          </div>
-                      </div> 
-                  </div>
-                  <div class="row mt-4">
-                      <div class="col-half">
-                          <h5>Gender</h5>
-                          <div class="input-group">
-                              <h5><%= certificate.gender %></h5>
-                          </div>
-                      </div>
-                      <div class="col-half font-bold">
-                          <h5>Date of Birth</h5>
-                          <div class="input-group">
-                              <div class="col-third">
-                                  <h5 class=""><%= moment(certificate.dob).format('MMMM Do, YYYY')  %></h5>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="row mt-4">
-                      <div class="col-half">
-                          <h5>Date of Admission</h5>
-                          <div class="h5-group">
-                              <div class="col-third">
-                                  <h5><%= moment(certificate.doa).format('MMMM Do, YYYY')  %></h5>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-half">
-                          <h5>Date of Graduation</h5>
-                          <div class="input-group">
-                              <div class="col-third">
-                                  <h5><%= moment(certificate.dog).format('MMMM Do, YYYY') %></h5>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="row mt-4">
-                      <div class="col-half">
-                          <h5>Issued Date</h5>
-                          <div class="h5-group">
-                              <div class="col-third">
-                                  <h5><%= moment(certificate.createdAt).format('D/M/YYYY') %></h5>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-half">
-                          <h5>Updated Date</h5>
-                          <div class="input-group">
-                              <div class="col-third">
-                                  <h5><%= moment(certificate.updatedAt).format('D/M/YYYY') %></h5>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="btn"></div>
-              <a class="float-right mt-6 text-2xl" href="/university/certificate/table">Go Back</a>
-          </form>
-      </section>
-</section>
 <% }else{ %>
 <!-- Certificate Info Not Available Section Start -->
 <section class="home-content py-20">

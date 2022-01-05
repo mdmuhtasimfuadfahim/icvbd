@@ -11,6 +11,38 @@ const { debuglog } = require('util')
 var nodemailer = require('nodemailer')
 const sgMail = require('@sendgrid/mail')  //Sendgrid Transactional Email
 
+function checkMakerLogin(req,res){
+    if(!req.session.uniUserType){
+        res.redirect('/university/login')
+    }
+    if(!(req.session.uniUserType==='maker' || req.session.uniUserType==='Maker')){
+        req.flash('error','To access this page Please login again with proper credentials')
+        res.redirect('/university/login')
+    }
+}
+
+function checkCheckerLogin(req,res){
+    if(!req.session.uniUserType){
+        res.redirect('/university/login')
+    }
+    if(!(req.session.uniUserType==='checker' || req.session.uniUserType==='Checker')){
+        req.flash('error','To access this page Please login again with proper credentials')
+        res.redirect('/university/login')
+    }
+}
+
+function checkMakerOrCheckerLogin(req,res){
+    if(!req.session.uniUserType){
+        res.redirect('/university/login')
+    }
+    if(!(req.session.uniUserType==='checker' || req.session.uniUserType==='Checker' 
+                                     ||
+       req.session.uniUserType==='maker' || req.session.uniUserType==='Maker'))
+    {
+        req.flash('error','To access this page Please login again with proper credentials')
+        res.redirect('/university/login')
+    }
+}
 
 async  function uniEventLogger(uniName,loggerText,official){
     
@@ -90,14 +122,17 @@ function universityCertificateController(){
     return{
         /* Shows certificate creation form  */ 
         fromRender(req, res){
+            checkMakerLogin(req,res)
             res.render('universities/certificate/createForm',{user:req.session.user})
         },
         /* Shows a list of approved certificate */ 
         async tableRender(req, res){
+            checkMakerOrCheckerLogin(req,res)
             const certificate = await Certificate.find({university_name:req.session.user.uniName,isVerified:'approved'})
             res.render('universities/certificate/certificateTable2', {certificate: certificate, moment: moment,user:req.session.user})
         },
         updateForm(req, res){
+            checkMakerOrCheckerLogin(req,res)
             axios.get(`${process.env.APP_BASE_URL}/university/certificate/update`, { params : { id : req.query.id }}).then((certificateData) =>{
                  console.log(certificateData.data)
                 res.render('universities/certificate/updateForm', { certificate : certificateData.data})
@@ -108,6 +143,7 @@ function universityCertificateController(){
 
         /*******Certificate Creation by Maker *****/
         createCertificate(req, res){
+            checkMakerLogin(req,res)
             console.log(req.body)
             const { full_name, email_address, email_address_personal, student_id, credit, courses, university_name, major, cgpa, minor, dob, gender, doa, dog,father_name,mother_name } = req.body
             console.log("The request body is: ", req.body)
@@ -305,7 +341,9 @@ function universityCertificateController(){
                 })
             }
         },
+        /* Certificate Update */
         postUpdate(req, res){
+            checkMakerOrCheckerLogin(req,res)
             if(!req.body){
                 return res.status(400).send({ message: 'Data to Update can not be Empty'})
             }
@@ -321,6 +359,7 @@ function universityCertificateController(){
                 res.status(500).send({ message: 'Error in Updating Certificate Information'})
             })
         },
+        /*------- Certificate Delete ---------  */
         postDelete(req, res){
             const id = req.params.id
 
@@ -356,9 +395,7 @@ function universityCertificateController(){
 
         /* Checker Dashboard Controller */
         async checkerDashboard(req,res){
-            if(req.session.uniUserType !='checker'){
-               res.redirect('/university/login')
-            }
+            checkCheckerLogin(req,res)
             university_name = req.session.user.uniName
             const certificates = await Certificate.find({isVerified:'not_verified',university_name:university_name}, null, {sort: { 'createdAt': -1 }})
             // console.log(certificates)
@@ -439,7 +476,7 @@ function universityCertificateController(){
 
         /* Display a single certificate where users can comment */ 
         async singleCertificateDisplay(req,res){
-
+           checkMakerOrCheckerLogin(req,res)
            var studentID = req.params.certId
            var certificateID = req.params.certId //assigned only for clarity
            
@@ -450,9 +487,9 @@ function universityCertificateController(){
            Certificate.findOne({_id: certificateID}).populate('comments').
                     exec(function (err, certificateDoc) {
                         if (err) {console.log(err)}
-                            console.log("Certificate Doc is:" + certificateDoc)
-                            console.log('The author is ' + certificateDoc.comments);
-                            res.render('universities/certificate/certificateDetails',{certificate:certificateDoc,moment:moment,empty:false})
+                        console.log("Certificate Doc is:" + certificateDoc)
+                        console.log('The author is ' + certificateDoc.comments);
+                        res.render('universities/certificate/certificateDetails',{certificate:certificateDoc,comments: certificateDoc.comments,moment:moment,empty:false})
                        
                     });
         //    const certificate = await Certificate.findOne({_id: certificateID},(err,result)=>{
@@ -535,16 +572,29 @@ function universityCertificateController(){
 
         /* Posts comments from certificate details page */ 
         async certCommentPost(req, res){
-            if (req.body.commentText.length === 0)
+            checkMakerOrCheckerLogin(req,res)
+            const certificateID = req.body.cID 
+            if (req.body.commentText.length === 0){
                 console.log('comment is empty')
+            }
             else{
+                //posterType should come from session
+                if(req.session.uniUserType === 'checker' || req.session.uniUserType === 'checker' ){
+                    let author = 'Checker'
+                    let receiver = 'Maker'
+                }
+                else {
+                    let author= 'Maker'
+                    let receiver = 'Checker'
+                }
+
+
                 const commentText = req.body.commentText
-                const certificateID = req.body.cID 
                 const comment = new Comment({
                                         universityName:'University of Barishal',
-                                        posterType: 'Maker',
+                                        posterType: author,
                                         textBody: commentText,
-                                        recipient: "Checker",
+                                        recipient: receiver,
                                         certificateID: certificateID
                                     })
                 await comment.save()
@@ -552,11 +602,13 @@ function universityCertificateController(){
                 const certificate = await Certificate.findOne({_id: certificateID})
                 certificate.comments.push(comment)
                 await certificate.save()
-                //creating redirect URL 
-                const url = '/university/certificate-details/' + certificateID
-                res.redirect(url)
+                
                                 
             } //end of else block
+
+            //creating redirect URL 
+            const url = '/university/certificate-details/' + certificateID
+            res.redirect(url)
 
         },
 

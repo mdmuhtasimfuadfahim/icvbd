@@ -1,8 +1,32 @@
 <section class="home-content py-20">
+    <div class="overview-boxes">
+      <div class="box">
+        <div class="right-side">
+          <a href="/student/account" class="box-topic">My Account</a>
+        </div>
+      </div>
+      <div class="box">
+        <div class="right-side">
+          <a href="/student/certificate" class="box-topic"> My Certificate</a>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="right-side">
+          <a href="/student/public/certificate" class="box-topic"> QR</a>
+        </div>
+      </div>
+     
+    </div>
+</section>
+
+
+<!-- Body Section -->
+
+<section class="home-content py-20 -mt-60">
     <section class="ml-20 certificate_container py-20">
 
-            <h3 class="sub-heading"> Certificate Status </h3>
-            <h1 class="heading"> Check Your Details </h1>
+            <h1 class="heading"> Certificate Details </h1>
             <% if(empty){ %>
                 <h1><%= empty%></h1>
                 <h1 class="heading"> No certificate information at the moment. Contact your authority for further details  </h1>
@@ -14,13 +38,13 @@
                     
                     <div class="input-group input-group-icon">
                         <% if(certificate.isVerified === 'not_approved'){ %>
-                        <h5 class="mt-2 ml-20" style="font-size: 16px">Your digital certificate has been created & waiting to be validated. You will get the ID once
+                        <h4 class="mt-2 ml-20" style="font-size: 16px">Your digital certificate has been created & waiting to be validated. You will get the ID once
                             it is validated and added to blockchain 
-                        </h5>
+                        </h4>
                         <% } %>
                         
                         <% if(certificate.isVerified === 'approved'){ %>
-                        <h5 class="mt-2 ml-20 " style="font-size: 16px">Congrats!!Your digital certificate has been created and added to blockchain </h5>
+                        <h4 class="mt-2 ml-20 " style="font-size: 16px">Congrats!!Your digital certificate has been created and added to blockchain </h4>
                         <% } %>
                         <span class="input-icon">
                             <i class="fa fa-user"></i>
@@ -28,33 +52,33 @@
                     </div>
                     <% if(certificate.length){%>
                     <div class="input-group input-group-icon">
-                        <h5 class="mt-2 ml-20">Your certificate ID: <%= certificate.uniqueID %></h5>
+                        <h4 class="mt-2 ml-20">Your certificate ID: <%= certificate.uniqueID %></h4>
                         <span class="input-icon">
                             <i class="fa fa-envelope"></i>
                         </span>
                     </div>
                     <% }  %>
                     <div class="input-group input-group-icon">
-                        <h5 class="mt-2 ml-20">Your Certificate was created at: <%= moment(certificate.created_at).format('DD:MM:YYYY') %></h5>
+                        <h4 class="mt-2 ml-20">Your Certificate was created at: <%= moment(certificate.created_at).format('DD:MM:YYYY') %></h4>
                         <span class="input-icon">
                             <i class="fas fa-mobile-alt"></i>
                         </span>
                     </div>
                     <div class="input-group input-group-icon">
-                        <h5 class="mt-2 ml-20">Your Major was in <%= certificate.major %></h5>
+                        <h4 class="mt-2 ml-20">Your Major was in <%= certificate.major %></h4>
                         <span class="input-icon">
                             <i class="fas fa-id-card-alt"></i>
                         </span>
                     </div>
                     <div class="input-group input-group-icon">
-                        <h5 class="mt-2 ml-20">Your minor was in <%= certificate.minor %></h5>
+                        <h4 class="mt-2 ml-20">Your minor was in <%= certificate.minor %></h4>
                         <span class="input-icon">
                             <i class="fas fa-university"></i>
                         </span>
                     </div>
 
                     
-                    <ul class="list-disc text-2xl">
+                    <ul class="list-disc text-2xl mt-10">
                         <li class="mb-5">University Name: <span class="font-bold"><%= certificate.university_name%></span></li>
                         <li class="mb-5">Full Name: <span class="font-bold"><%= certificate.full_name%></span></li>
                         <li class="mb-5">Required Credits: <span class="font-bold capitalize"><%= certificate.credit %></span></li>
@@ -62,8 +86,8 @@
                         <li class="mb-5">Required Credits: <span class="font-bold"><%= certificate.credit %></span></li>
                         <li class="mb-5">Date of Admission:<span class="font-bold"> <%= moment(certificate.doa).format('MMMM Do, YYYY') %></span></li>
                         <li class="mb-5">Date of Graduation<span class="font-bold"> <%= moment(certificate.dog).format('MMMM Do, YYYY') %></span></li>
-                        <li class="mb-5">Father's Name: <span class="font-bold"><%= certificate.father_name%></span></li>
-                        <li class="mb-5">Mother's Name: <span class="font-bold"><%= certificate.mother_name%></span></li>
+                        <li class="mb-5">Father's Name: <span class="font-bold"><%= certificate.father_name.length ? '${certificate.father_name}': 'N/A'%></span></li>
+                        <li class="mb-5">Mother's Name: <span class="font-bold"><%= certificate.mother_name? '${certificate.mother_name}': 'N/A'%></span></li>
                         
                         <!-- ... -->
                     </ul>

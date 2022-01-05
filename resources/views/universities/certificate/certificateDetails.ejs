@@ -27,6 +27,19 @@
                         <!-- ... -->
                     </ul>
                     
+                    <div>
+                        <h1 class="text-center text-4xl mb-10">Comments:</h1>
+                        <% certificate.comments.forEach(comment => { %>  
+                            <div name="commentBox mb-10">
+                                <h3 class="text-3xl italic mb-3" style="text-decoration:underline;">
+                                    <%= comment.posterType %>
+                                </h3>
+                                <p class="text-3xl"><%= comment.textBody %> </p>
+                            </div>    
+                        <% }) %>   
+                        
+                    </div>
+                   
                     <form action="/certificate-comment/save"  method="POST" id="commentForm" class="mt-10">
                         
                         <label for="commentText" class="block text-left" style="max-width: 800px;font-size:25px">
