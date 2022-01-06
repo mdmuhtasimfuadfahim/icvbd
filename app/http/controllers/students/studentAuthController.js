@@ -27,8 +27,16 @@ async function fetchUniNames(){
 /*---------------Controller---------- */
 function studentAuthController(){
     return{
-        index(req, res){
-            res.render('auth/students/registration', {uniNames: fetchUniNames()} )
+        async index(req, res){
+            await University.find({},'-_id uniName',(err,result)=>{
+                if(err)
+                    console.log(err)
+                else{  
+                    console.log(result)
+                    res.render('auth/students/registration', {uniNames: result} )
+                }
+            })
+            
         },
         login(req, res){
             res.render('auth/students/login')
@@ -74,7 +82,7 @@ function studentAuthController(){
             })
 
             /*-------------check if student academic email exists------------*/ 
-            Student.exists({personalEmail: perEmail,uniName:uniName}, (err, result) =>{
+            Student.exists({personalEmail: personalEmail,uniName:uniName}, (err, result) =>{
                 if(result){
                     req.flash('error', 'This academic email is already registered')
                     req.flash('firstName', firstName)

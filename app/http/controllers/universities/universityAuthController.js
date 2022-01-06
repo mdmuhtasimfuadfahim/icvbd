@@ -360,7 +360,7 @@ function universityAuthController(){
         },
         async postLogin(req, res, next){
             const { officialemail, password, employeeEmail,userType } = req.body
-            console.log(req.body)
+            console.log('The request body is ', req.body)
 
             /*------------validate request---------*/
             if(!officialemail || !password || !employeeEmail){
@@ -387,16 +387,20 @@ function universityAuthController(){
                  res.redirect('/university/login')
             }
             
+            console.log('Point 715')
             if(userType === 'maker'){
+                console.log('Point 716')
                 if(user.emailOne === employeeEmail){
+                    console.log('Point 717')
                     await bcrypt.compare(password, user.password).then(match =>{
                         if(match){
+                            console.log('Match Happened')
                             req.session.user=user
                             req.session.uniUserType='maker'
                             res.redirect('/university/dashboard')
                         }
                     }).catch(err =>{
-                        //         console.log(err)            
+                        console.log(err)            
                     })
                 }
                 else{
@@ -406,9 +410,11 @@ function universityAuthController(){
                 }
 
             }
-
+            console.log('Point 718')
             if (userType === 'checker'){
+                console.log('Point 719')
                 if(user.emailTwo === employeeEmail){
+                    console.log('Point 720')
                     await bcrypt.compare(password, user.password).then(match =>{
                         if(match){
                             console.log('Checker login success')
