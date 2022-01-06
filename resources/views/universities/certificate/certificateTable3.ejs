@@ -73,9 +73,10 @@
         </div>
         <div class="cell" data-title="Action">
           <a href="/university/certificate-details/<%= certificate[i]._id %>" class="btn border-shadow update">
-            <i class="fas fa-user-edit"></i></a>
-            <a class="btn border-shadow delete" data-id=<%= certificate[i]._id %> >
-              <i class="fas fa-times"></i>
+            <i class="fas fa-user-edit"></i>
+          </a>
+          <a class="btn border-shadow delete" href="/university/certificate-delete-prompt/<%= certificate[i]._id %>" data-id=<%= certificate[i]._id %> >
+            <i class="fas fa-times"></i>
           </a>
           <a class="btn border-shadow read" href="/university/certificate/read/read_from?id=<%= certificate[i]._id %>" >
             <i class="fas fa-book-reader"></i>
