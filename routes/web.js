@@ -67,6 +67,10 @@ function initRoutes(app){
     app.get('/university/certificate/update_form', universityCertificateController().updateForm) 
     app.put('/university/certificate/update/:id',  universityCertificateController().postUpdate) 
     app.delete('/university/certificate/delete/:id', universityCertificateController().postDelete)
+
+    app.get('/university/certificate-delete-prompt/:id',universityCertificateController().certificateDeleteByIdShow)
+    app.get('/university/certificate-delete/:id',universityCertificateController().certificateDeleteById)
+
     app.get('/university/certificate/read/read_from', universityCertificateController().showReadOnly)
     app.get('/university/certificate/update', universityCertificateController().postFind)
     app.post('/university/certificate/edit', universityCertificateController().certificateEdit)

@@ -359,6 +359,26 @@ function universityCertificateController(){
                 res.status(500).send({ message: 'Error in Updating Certificate Information'})
             })
         },
+        /** Displays Certificate Delete Prompt */
+        certificateDeleteByIdShow(req,res){
+            let delURL = '/university/certificate-delete/'+ req.params.id
+            res.render('universities/certificate/certificate-del-prompt',{targetURL:delURL})
+        },
+        /** Certificate Delete Version 2 */
+        certificateDeleteById(req,res){
+            const id = req.params.id
+            console.log(id)
+            Certificate.findByIdAndDelete(id, function (err, docs) {
+                if (err){
+                    console.log(err)
+                }
+                else{
+                    console.log("Deleted : ", docs);
+                }
+            })
+            res.redirect('/university/certificate/approved-list')
+        },
+
         /*------- Certificate Delete ---------  */
         postDelete(req, res){
             const id = req.params.id
@@ -412,8 +432,8 @@ function universityCertificateController(){
                                 console.log(err)
                             else{
                                 /**Sending Email */
-                                let emailDestination = 'aminulrakib@yopmail.com' //for testing purpose only
-                                //let emailDestination = doc.email_address_personal
+                                //let emailDestination = 'aminulrakib@yopmail.com' //for testing purpose only
+                                let emailDestination = doc.email_address_personal
                                 let emailSubject = "Your university certificate has been created"
                                 let emailText = "Your Certificate has been created with ID: " + doc.uniqueID
                                 console.log(emailDestination,emailSubject,emailText)             
