@@ -1,4 +1,5 @@
 const University= require('../../../models/university')
+const Accounts = University
 const FAQ = require('../../../models/faq')
 const Others = require('../../../models/other')
 const Certificate = require('../../../models/certificate')
