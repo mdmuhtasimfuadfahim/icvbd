@@ -125,20 +125,7 @@
               <span class="links_name">Users</span>
             </a>
           </li>
-        <% } else if(user.role === "UGC") { %>
-          <li>
-            <a href="/university/certificate/approved-list" class="">
-              <i class='bx bx-grid-alt'></i>
-              <span class="links_name">Certificates Approved</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="/university/certificate/maker/view-pending" class="">
-              <i class='bx bx-grid-alt'></i>
-              <span class="links_name">Certificates Pending</span>
-            </a>
-          </li>
+        
         <% } else if(user.role === "Other") { %>
           <li>
             <a href="/other/account">

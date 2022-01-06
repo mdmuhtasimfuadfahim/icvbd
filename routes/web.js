@@ -24,6 +24,7 @@ const other = require('../app/http/middlewares/other')
 
 function initRoutes(app){
     app.get('/', homeController().index)
+    app.get('/global-redirect', homeController().globalRedirect)
     app.post('/frontpage/verify', homeController().verifyCertificate)
     app.post('/ugc/frontpage/verify', ugcDashboardController().verifyCertificate)
     app.post('/university/frontpage/verify', universityDashboardController().verifyCertificate)
@@ -125,6 +126,7 @@ function initRoutes(app){
 
     app.get('/ugc/admin/create-faq',ugcRequestController().createQA)
     app.post('/ugc/admin/create-faq',ugcRequestController().createQA)
+    app.get('/ugc/public/faq',ugcRequestController().publicQA)
 
     app.get('/ugc/client/create',  ugcDashboardController().showThirdPartyRegistrationForm)
     app.post('/ugc/client/create-form-process',  ugcDashboardController().thirdPartyRegistration)

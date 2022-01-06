@@ -1,0 +1,22 @@
+<section class="home-content py-20" style="margin-left:240px">
+   
+    
+
+<!-- Faq List display  section start -->
+<section class="login py-2" style="margin-left:-10px;margin-top:-10px">
+  <h1 class="text-5xl text-center"><u>Frequently Asked Questions</u> </h1>
+  
+  <div class="inputBox" >
+    <% if(locals.faqs){%>
+      <% faqs.forEach(function(faq){%>
+        <h1 class="text-5xl mt-10"> <%= faq.question %> </h1>
+        <p class="text-3xl my-10"> <%= faq.answer %> </p>
+      <% }); %>
+    <% } %>
+  </div>
+     
+
+  
+</section>
+
+</section>

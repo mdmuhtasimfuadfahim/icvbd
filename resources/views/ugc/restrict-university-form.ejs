@@ -15,12 +15,14 @@
                 <label class="block text-left" style="max-width: 800px">
                     <span class="text-gray-700 text-4xl">Select a varsity to Restrict or Allow access</span>
                     <br>
-                    <select class="form-select block w-full mt-1">
+                    <select class="form-select block w-full mt-1" name="varsityName">
                       <option>Click to select</option>
-                      <option>University of Barishal</option>
-                      <option>University of Khulna</option>
-                      <option>University of Liberal Arts</option>
-                      <option>North South University</option>
+                      <% varsities.forEach(val=>{ %>
+                        <option value="<%= val.uniName %> ">
+                          <%= val.uniName %>
+                        </option>
+                      <% }) %>
+                      
                     </select>
                   </label>
             </div>

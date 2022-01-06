@@ -614,6 +614,7 @@ function universityCertificateController(){
 
         },
 
+        /* Handles POST from certificate filter form */
         async certificateFilterProcess(req,res){
             
             //has to include university name 
@@ -674,10 +675,14 @@ function universityCertificateController(){
             find(filter).
             where('createdAt').gte(startDate).lt(endDate).
             sort({'createdAt':-1}).
-            exec((err,result)=>console.log("The number of certificates  are:"+ result.length))
+            exec((err,result)=>{
+                console.log("The number of certificates  are:"+ result.length)
+                res.render("universities/certificate/filterResult",{certificate:result,moment:moment})
+            })
             
         },
 
+        /* Displays Certificate Filter */
         async certificateFilterDisplay(req,res){
             res.render('universities/certificate/certificateFilter')
         }

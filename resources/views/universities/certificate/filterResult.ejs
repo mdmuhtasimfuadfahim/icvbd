@@ -1,0 +1,94 @@
+<section class="home-content" style= "margin-left:120px" >
+  <h3 class="sub-heading"> List of Certificates Pending to be Approved</h3>
+  <h1 class="heading"> Your Filtered  certificates </h1>
+  <div class="table-wrapper">
+    <div class="new-table w-full mx-auto table-certificate">
+      
+      <div class="table-row table-header">
+        
+        <div class="cell">
+          Full Name
+        </div>
+        
+        <div class="cell">
+          Student ID
+        </div>
+        
+        <div class="cell">
+          Major
+        </div>
+        <div class="cell">
+          CGPA
+        </div>
+       
+        
+        <div class="cell">
+          Date of Admission
+        </div>
+        <div class="cell">
+          Date of Graduation
+        </div>
+        <div class="cell">
+          Created Date
+        </div>
+        <div class="cell">
+          Updated Date
+        </div>
+        <div class="cell">
+          Updated Date
+        </div>
+        <div class="cell">
+          Action
+        </div>
+      </div>
+      
+      <% for(var i = 0; i < certificate.length; i++) { %>
+      <div class="table-row table-body">
+        
+        <div class="cell" data-title="Full Name">
+          <%= certificate[i].full_name %>
+        </div>
+        
+        <div class="cell" data-title="Student ID">
+          <%= certificate[i].student_id %>
+        </div>
+        
+       
+        <div class="cell" data-title="Major">
+          <%= certificate[i].major %>
+        </div>
+        <div class="cell" data-title="CGPA">
+          <%= certificate[i].cgpa %>
+        </div>
+        
+        
+        <div class="cell" data-title="Date of Admission">
+          <%= moment(certificate[i].doa).format('MMMM Do, YYYY')  %> %>
+        </div>
+        <div class="cell" data-title="Date of Graduation">
+          <%= moment(certificate[i].dog).format('MMMM Do, YYYY') %> %>
+        </div>
+        <div class="cell" data-title="Created Date">
+          <%= moment(certificate[i].createdAt).format('MMMM Do, YYYY h:mm A') %>
+        </div>
+        <div class="cell" data-title="Updated Date">
+          <%= moment(certificate[i].updatedAt).format('MMMM Do, YYYY h:mm A') %>
+        </div>
+        <div class="cell" data-title="Updated Date">
+          <%= certificate[i].isVerified === 'not_verified'? "Not Approved":"Approved" %>
+        </div>
+        <div class="cell" data-title="Action">
+          <a href="/university/certificate-details/<%= certificate[i]._id %>" class="btn border-shadow update">
+            <i class="fas fa-user-edit"></i></a>
+            <a class="btn border-shadow delete" data-id=<%= certificate[i]._id %> >
+              <i class="fas fa-times"></i>
+          </a>
+          <a class="btn border-shadow read" href="/university/certificate/read/read_from?id=<%= certificate[i]._id %>" >
+            <i class="fas fa-book-reader"></i>
+        </a>
+        </div>
+      </div> 
+      <% } %>     
+    </div>    
+  </div>
+</section>

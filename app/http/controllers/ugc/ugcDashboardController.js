@@ -48,18 +48,18 @@ function ugcDashboardController(){
             res.render('ugc/dashboard',{certificate:[], moment:moment, empty:true, user:req.session.user})
         },
 
-        /** Single Certificate Verification for UGC **/
+        /** Single Certificate Search for UGC **/
         async verifyCertificate(req,res){
-    
+            //UGC can search for approved certificates only
             if(!req.body.uniqueID)
                 res.render('ugc/dashboard',{certificate:[], moment:moment, empty:true, user:req.session.user})
-            const certificate = await Certificate.findOne({uniqueID : req.body.uniqueID },(err,result)=>{
+            const certificate = await Certificate.findOne({uniqueID : req.body.uniqueID,isVerified:'approved' },(err,result)=>{
                 if(err){
                     console.log(error)
                 }
                 if(result){  
                 //    console.log('route1')      
-                   res.render('ugc/dashboard',{certificate:result, moment:moment, empty:false, user:req.session.user})
+                   res.render('universities/certificate/readOnly',{certificate:result, moment:moment, empty:false, user:req.session.user})
                 }else{
                 //    console.log('route2')    
                    req.flash('error','No certificate with this id found')

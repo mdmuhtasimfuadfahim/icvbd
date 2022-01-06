@@ -103,10 +103,10 @@
           <%= certificate[i].dog_d %>/<%= certificate[i].dog_m %>/<%= certificate[i].dog_y %>
         </div>
         <div class="cell" data-title="Created Date">
-          <%= moment(certificate[i].createdAt).format('DD:MM:YYYY') %>
+          <%= moment(certificate[i].createdAt).format('DD/MM/YYYY') %>
         </div>
         <div class="cell" data-title="Updated Date">
-          <%= moment(certificate[i].updatedAt).format('DD:MM:YYYY') %>
+          <%= moment(certificate[i].updatedAt).format('DD/MM/YYYY') %>
         </div>
         <div class="cell" data-title="Action">
           <a href="/university/certificate/update_form?id=<%= certificate[i]._id %>" class="btn border-shadow update">

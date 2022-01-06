@@ -1,9 +1,28 @@
-const Accounts = require('../../../models/university')
+const University= require('../../../models/university')
 const FAQ = require('../../../models/faq')
 const Others = require('../../../models/other')
 const Certificate = require('../../../models/certificate')
 const Log = require('../../../models/logging')
 const moment = require('moment')
+
+
+async function fetchUniversity(req,res){
+    let univ
+    let exp = false 
+    await University.find({},'-_id uniName',(err,result)=>{
+        if(err)
+            console.log(err)
+        else{
+            univ = result
+            exp  = true
+            console.log(result)
+            return result 
+        }
+    })
+   
+    
+}
+
 
 function ugcRequestController(){
     return{
@@ -74,15 +93,47 @@ function ugcRequestController(){
         },
         
         /* displays form for restricting universities from making certificates */ 
-
         async restrictUniversityDisplay(req,res){
-            res.render('ugc/restrict-university-form.ejs',{user:req.session.user})
+            await University.find({},'-_id uniName',(err,result)=>{
+                if(err)
+                    console.log(err)
+                else{
+                    
+                    console.log(result)
+                    res.render('ugc/restrict-university-form.ejs',{user:req.session.user,varsities:result})
+                   
+                }
+            })
+            
+            
         },
 
         /* POST Handler process form for restricting universities */ 
         async restrictUniversityPost(req,res){
-            console.log(req.body)
-            res.redirect('/ugc/university/restricted-list') //url
+            console.log('Came to POST handler')
+            if(!req.body.varsityName){
+                res.redirect('/ugc/university/restrict')
+            }
+            else{
+                let status
+                if(req.body.radio='allow')
+                    {status="approved"}
+                else{
+                    status="not_approved"
+                }
+
+                await University.findOneAndUpdate({uniName:req.body.varsityName},{registrationStatus:status},(err,result)=>{
+                    if(err){
+                        console.log(err)
+                    }
+                    if(result){   
+                        console.log("The result is",result)
+                        result.registrationStatus = 'not_approved'
+                        result.save((err)=>console.log(err))    
+                    }
+                })
+            }
+            res.redirect('/ugc/university/restrict') 
         },
 
         /* displays list of restricted universities */ 
@@ -172,11 +223,27 @@ function ugcRequestController(){
                 }
             })
 
-
-
             res.render('ugc/create-faq',{faqs:retrievedFaq})
         },
+        /* Display FAQ for public */
+        async publicQA(req,res){
+        console.log("from public qa")
+            var retrievedFaq = {}  // this will hold all faq read from db
+            await FAQ.find({},(err,result)=>{
+                if(err){
+                    console.log(err)
+                }
+                else{
+                    retrievedFaq = result 
+                    console.log(result)
+                
+                }
+            })
 
+
+            res.render('ugc/public-faq',{faqs:retrievedFaq})
+
+        },
 
         /* experimental function */ 
         async certificateBulkUpdateCron(req,res){
