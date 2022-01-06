@@ -31,7 +31,7 @@ function ugcRequestController(){
             // const account = await Accounts.find()
             // console.log(account)
             var numOfAccounts = 0 
-            const account = await Accounts.find({ registrationStatus: 'not_approved' }, null, { sort: { 'createdAt': -1 }})
+            const account = await University.find({ registrationStatus: 'not_approved' }, null, { sort: { 'createdAt': -1 }})
             
             if(!account){
                 req.flash('error','there are no pending account requests at this moment')
@@ -54,7 +54,7 @@ function ugcRequestController(){
         /*Shows a list of University accounts with Approved Registration */ 
         async showCompleted(req, res){
             //Account corresponds to Universitiy Model
-            const accounts = await Accounts.find({ registrationStatus: 'approved' }).sort({'updatedAt': -1 })
+            const accounts = await University.find({ registrationStatus: 'approved' }).sort({'updatedAt': -1 })
             
             res.render('ugc/university/approved', {accounts: accounts, moment: moment, user:req.session.user})
             
