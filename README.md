@@ -1,5 +1,5 @@
 
-# <img src="https://user-images.githubusercontent.com/96743100/160246953-3134121f-edc3-4b43-bc7a-1ed5f5ddb994.png" height="40px" width="40px"/> ICV: BLOCKCHAIN BASED CERTIFICATE VERIFICATION BY UGC
+# <h1 align="center"><img src="https://user-images.githubusercontent.com/96743100/160246953-3134121f-edc3-4b43-bc7a-1ed5f5ddb994.png" height="40px" width="40px"/> ICV: BLOCKCHAIN BASED CERTIFICATE VERIFICATION BY UGC </h1>
 ## Instant Certificate Verification
 
 
