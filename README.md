@@ -1,5 +1,5 @@
 
-# <i class="fas fa-link"> ICV: BLOCKCHAIN BASED CERTIFICATE VERIFICATION BY UGC
+# ICV: BLOCKCHAIN BASED CERTIFICATE VERIFICATION BY UGC
 ## Instant Certificate Verification
 
 ### Description
