@@ -21,7 +21,7 @@ This a product for all universities, companies/corporates, students and UGC. By 
 
   **Step 1: Download the repository or clone it by:**
   ```shell
-  git clone https://github.com/bitecUGC/icvbd
+  git clone https://github.com/mdmuhtasimfuadfahim/icvbd
   ```
 
   **Step 2: Run the following commands from the root directory to install all dependencies:**
